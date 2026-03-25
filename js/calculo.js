@@ -167,5 +167,4 @@ function logaritmo() {
   let expoente = document.getElementById("expoente");
   let base = document.getElementById("base");
 
-  let res = 
 }
