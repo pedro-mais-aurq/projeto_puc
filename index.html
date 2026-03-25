@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> MATHeus </title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+    <link rel="stylesheet" href="css/paleta.css" />
+
+    <style>
+        body {
+            background-color: var(--madeira-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .calculadora {
+            background-color: var(--quadro);
+            border: 10px solid var(--madeira);
+            border-radius: 12px;
+            padding: 20px;
+            width: 320px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .display {
+            background-color: var(--quadro-dark);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            text-align: right;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #expressao {
+            color: var(--giz-escuro);
+            font-family: 'Caveat', cursive;
+            font-size: 15px;
+            min-height: 22px;
+        }
+
+        #valor {
+            color: var(--giz);
+            font-family: 'Special Elite', cursive;
+            font-size: 42px;
+            word-break: break-all;
+            line-height: 1.1;
+            transition: font-size 0.1s;
+        }
+
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            height: 62px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Special Elite', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        .limpar {
+            background-color: var(--vermelho-dark);
+            color: var(--giz);
+        }
+
+        .apagar {
+            background-color: var(--vermelho-dark);
+            color: var(--giz);
+        }
+
+        .operacao {
+            background-color: var(--vermelho-dark);
+            color: var(--giz);
+        }
+
+        .numero {
+            background-color: var(--quadro-light);
+            color: white;
+        }
+
+        .numero.zero {
+            grid-column: span 2;
+        }
+
+        .igual {
+            background-color: var(--accent);
+            color: var(--ink);
+            font-size: 24px;
+        }
+
+        .igual:hover {
+            background: #ceb039;
+        }
+
+        .numero:hover {
+            background: #437a3a;
+        }
+
+        .operacao:hover {
+            background: #b03020;
+        }
+
+        .limpar:hover {
+            background: #a52020;
+        }
+
+        .apagar:hover {
+            background: #7a5828;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculadora">
+        <div class="display">
+            <span id="expressao"></span>
+            <span id="valor">0</span>
+        </div>
+
+        <div class="botoes">
+            <button class="limpar" onclick="limpar()">AC</button>
+            <button class="apagar" onclick="apagar()">⌫</button>
+            <button class="operacao" onclick="escolherOperacao('%')">%</button>
+            <button class="operacao" onclick="escolherOperacao('÷')">÷</button>
+
+            <button class="numero" onclick="insert ('7')">7</button>
+            <button class="numero" onclick="insert ('8')">8</button>
+            <button class="numero" onclick="insert ('9')">9</button>
+
+            <button class="operacao" onclick="escolherOperacao('×')">×</button>
+
+            <button class="numero" onclick="insert ('4')">4</button>
+            <button class="numero" onclick="insert ('5')">5</button>
+            <button class="numero" onclick="insert ('6')">6</button>
+            <button class="operacao" onclick = "escolherOperacao('-')">-</button>
+
+            <button class="numero" onclick="insert ('1')">1</button>
+            <button class="numero" onclick="insert ('2')">2</button>
+            <button class="numero" onclick="insert ('3')">3</button>
+            <button class="operacao" onclick = "escolherOperacao('+')">+</button>
+            <button class="numero zero" onclick="insert ('0')">0</button>
+            <button class="operacao">.</button>
+            <button class="igual" onclick="calcular()">=</button>
+        </div>
+
+    </div>
+    
+    <script src="js/calculo.js"></script>
+</body>
+
+</html>
