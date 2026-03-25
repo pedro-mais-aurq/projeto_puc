@@ -141,26 +141,41 @@ function raiz() {
   atualizarDisplay();
 }
 
-function trig(op) {
-  let deg = parseFloat(numeroAtual);
-  let num = (deg * Math.PI) / 180;
-  let res;
-  switch (op) {
-    case 'sin': res = Math.round(Math.sin(num)); break;
-    case 'cos': res = Math.cos(num); break;
-    case 'tan': res = (Math.sin(num) / Math.cos(num)); break;
+
+function calcularTrig() {
+  const input = document.getElementById('entrada');
+
+  const valor = input.value;
+  console.log("Valor digitado:", valor);
+
+  let deg = parseFloat(valor);
+
+  if (isNaN(deg)) {
+    alert("Digite um ângulo válido!");
+    return;
   }
 
+  let rad = (deg * Math.PI) / 180;
 
-  let conta = `${op} ${deg} = ${res}`;
-  historico.push(conta);
-  atualizarHistorico();
+  let seno = Math.sin(rad);
+  let cosseno = Math.cos(rad);
+  let tangente = Math.tan(rad);
 
-  numeroAtual = res.toString();
-  operacao = null;
-  numeroGuardado = null;
-  acabouDeCalcular = true;
-  atualizarDisplay();
+  seno = parseFloat(seno.toFixed(6));
+  cosseno = parseFloat(cosseno.toFixed(6));
+  tangente = parseFloat(tangente.toFixed(6));
+
+
+  atualizarResultadoTrig(seno, cosseno, tangente);
+
+  let conta = `${deg}° → sen: ${seno}, cos: ${cosseno}, tan: ${tangente}`;
+}
+
+function atualizarResultadoTrig(seno, cosseno, tangente) {
+
+  document.getElementById('seno').textContent = seno;
+  document.getElementById('cosseno').textContent = cosseno;
+  document.getElementById('tangente').textContent = tangente;
 }
 
 function logaritmo() {
