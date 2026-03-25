@@ -1,4 +1,3 @@
-console.log("JS carregado");
 let numeroAtual = '0';
 let numeroGuardado = null;
 let operacao = null;
@@ -34,6 +33,13 @@ function insert(num) {
   atualizarDisplay();
 }
 
+document.getElementById("inicial").onclick = function () {
+        location.href = "index.html";
+    };
+
+document.getElementById("avancada").onclick = function () {
+        location.href = "avancada.html";
+    };
 
 function atualizarDisplay() {
   document.getElementById('valor').textContent = numeroAtual;
@@ -80,7 +86,6 @@ function atualizarHistorico() {
   });
 } 
 function calcular() {
-  console.log("clicou no igual");
   if (operacao === null || numeroGuardado === null) return;
 
   let a = numeroGuardado;
@@ -93,6 +98,7 @@ function calcular() {
     case '×': resultado = a * b; break;
     case '÷': resultado = b !== 0 ? a / b : 'Erro'; break;
     case '%': resultado = a * (b / 100); break;
+    case '^': resultado = a**b; break;
   }
 
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
@@ -100,6 +106,45 @@ function calcular() {
   atualizarHistorico();
 
   numeroAtual = resultado.toString();
+  operacao = null;
+  numeroGuardado = null;
+  acabouDeCalcular = true;
+  atualizarDisplay();
+}
+
+function raiz(){
+  let num = parseFloat(numeroAtual);
+  let res;
+  
+  res = Math.sqrt(num);
+
+  let conta = `SQRT ${num} = ${res}`;
+  historico.push(conta);
+  atualizarHistorico();
+
+  numeroAtual = res.toString();
+  operacao = null;
+  numeroGuardado = null;
+  acabouDeCalcular = true;
+  atualizarDisplay();
+}
+
+function trig(op){
+  let deg = parseFloat(numeroAtual);
+  let num = (deg * Math.PI) / 180;
+  let res;
+  switch(op){
+    case 'sin': res = Math.sin(num); break;
+    case 'cos': res = Math.cos(num); break;
+    case 'tan': res = Math.tan(num); break;
+  }
+
+
+  let conta = `${op} ${deg} = ${res}`;
+  historico.push(conta);
+  atualizarHistorico();
+
+  numeroAtual = res.toString();
   operacao = null;
   numeroGuardado = null;
   acabouDeCalcular = true;
