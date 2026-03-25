@@ -306,7 +306,6 @@
         .riscado+#historico {
             margin-top: 20px;
         }
-        
     </style>
 </head>
 
@@ -328,53 +327,23 @@
                     <td id="inicial"> 🔢 Básica </td>
                     <td id="avancada"> 📊 Avançada</td>
                     <td id="log"> 🧮 Logaritmo</td>
-                    <td id ="equacao"> ✏️ Equações E Texto</td>
-                    <td id = "IA"> 🤖 MATHeus' IA </td>
+                    <td id="equacao"> ✏️ Equações E Texto</td>
+                    <td id="IA"> 🤖 MATHeus' IA </td>
                 </tr>
             </table>
-            <div class="separar">
-                <div class="calculadora">
-                    <div class="display">
-                        <span id="expressao"></span>
-                        <span id="valor">0</span>
-                    </div>
 
-                    <div class="botoes">
-                        <button class="limpar" onclick="limpar()">AC</button>
-                        <button class="apagar" onclick="apagar()">⌫</button>
-                        <button class="operacao" onclick="escolherOperacao('^')">^</button>                 
-                        <button class="operacao" onclick="raiz()">&#8730;</button>
+            <div class="calculadora">
+                <h2> Cálculo de Logartimo</h2>
+                <p> Informe o expoente :</p>
+                <input type="number" id = "expoente">
 
-                        <button class="numero" onclick="insert('7')">7</button>
-                        <button class="numero" onclick="insert('8')">8</button>
-                        <button class="numero" onclick="insert('9')">9</button>
+                <p> Informe a base :</p>
+                <input type="number" id = "expoente">
 
-                        <button class="trigonometria" onclick="trig('sin')">Seno</button>
-
-                        <button class="numero" onclick="insert('4')">4</button>
-                        <button class="numero" onclick="insert('5')">5</button>
-                        <button class="numero" onclick="insert('6')">6</button>
-                        <button class="trigonometria" onclick="trig('cos')">Cosseno</button>
-
-                        <button class="numero" onclick="insert('1')">1</button>
-                        <button class="numero" onclick="insert('2')">2</button>
-                        <button class="numero" onclick="insert('3')">3</button>
-                        <button class="trigonometria" onclick="trig('tan')">Tangente</button>
-                        <button class="numero zero" onclick="insert('0')">0</button>
-                        <button class="igual" onclick="insert('.')">.</button>
-                        <button class="igual" onclick="calcular()">=</button>
-                    </div>
-                </div>
-                <div class="separar2">
-                    <p> Histórico de Cálculos: </p>
-                    <div class="riscado"></div>
-                    <div id="historico"></div>
-                </div>
+                <button class = "numero" onclick="logaritmo()"> Calcular </button>
             </div>
-        </div>
-    </div>
 
-    <script src="js/calculo.js"></script>
+            <script src="js/calculo.js"></script>
 </body>
 
 </html>

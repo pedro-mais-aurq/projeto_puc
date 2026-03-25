@@ -34,12 +34,24 @@ function insert(num) {
 }
 
 document.getElementById("inicial").onclick = function () {
-        location.href = "index.html";
-    };
+  location.href = "index.html";
+};
 
 document.getElementById("avancada").onclick = function () {
-        location.href = "avancada.html";
-    };
+  location.href = "avancada.html";
+};
+
+document.getElementById("log").onclick = function () {
+  location.href = "log.html";
+};
+
+document.getElementById("equacao").onclick = function () {
+  location.href = "equacao.html";
+};
+
+document.getElementById("IA").onclick = function () {
+  location.href = "IA.html";
+};
 
 function atualizarDisplay() {
   document.getElementById('valor').textContent = numeroAtual;
@@ -84,7 +96,7 @@ function atualizarHistorico() {
     linha.textContent = item;
     div.appendChild(linha);
   });
-} 
+}
 function calcular() {
   if (operacao === null || numeroGuardado === null) return;
 
@@ -98,7 +110,7 @@ function calcular() {
     case '×': resultado = a * b; break;
     case '÷': resultado = b !== 0 ? a / b : 'Erro'; break;
     case '%': resultado = a * (b / 100); break;
-    case '^': resultado = a**b; break;
+    case '^': resultado = a ** b; break;
   }
 
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
@@ -112,10 +124,10 @@ function calcular() {
   atualizarDisplay();
 }
 
-function raiz(){
+function raiz() {
   let num = parseFloat(numeroAtual);
   let res;
-  
+
   res = Math.sqrt(num);
 
   let conta = `SQRT ${num} = ${res}`;
@@ -129,14 +141,14 @@ function raiz(){
   atualizarDisplay();
 }
 
-function trig(op){
+function trig(op) {
   let deg = parseFloat(numeroAtual);
   let num = (deg * Math.PI) / 180;
   let res;
-  switch(op){
-    case 'sin': res = Math.sin(num); break;
+  switch (op) {
+    case 'sin': res = Math.round(Math.sin(num)); break;
     case 'cos': res = Math.cos(num); break;
-    case 'tan': res = Math.tan(num); break;
+    case 'tan': res = (Math.sin(num) / Math.cos(num)); break;
   }
 
 
@@ -149,4 +161,11 @@ function trig(op){
   numeroGuardado = null;
   acabouDeCalcular = true;
   atualizarDisplay();
+}
+
+function logaritmo() {
+  let expoente = document.getElementById("expoente");
+  let base = document.getElementById("base");
+
+  let res = 
 }
