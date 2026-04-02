@@ -25,8 +25,8 @@
             background-blend-mode: overlay;
         }
 
-        .mesa {
-            width: 53%;
+        main {
+            width: 67%;
             min-height: 500px;
             border-radius: 18px;
             padding: 35px;
@@ -43,7 +43,7 @@
             overflow: hidden;
         }
 
-        .mesa::before {
+        main::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -64,7 +64,7 @@
             pointer-events: none;
         }
 
-        .itens-mesa {
+        .itens-main {
             position: relative;
             display: flex;
             gap: 24px;
@@ -74,22 +74,22 @@
         }
 
         .caderno {
-            width: 220px;
-            height: 300px;
+            width: 270px;
+            height: 360px;
             border-radius: 10px;
             position: relative;
 
             box-shadow:
                 0 12px 20px rgba(0, 0, 0, 0.25),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-
             transform: rotate(-2deg);
+
         }
 
         .folha-aberta {
             background: #f4ecd8;
-            width: 220px;
-            height: 300px;
+            width: 270px;
+            height: 360px;
             border-radius: 10px;
             padding: 30px 28px 24px 42px;
 
@@ -160,26 +160,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
-        button:active {
-            transform: scale(0.95);
-            opacity: 0.8;
-        }
 
-        .quadro {
-            position: relative;
-            width: 1000px;
-            padding: 16px;
-            border-radius: 10px;
-
-            background: linear-gradient(145deg,
-                    #5a3e2b,
-                    #3e2a1d);
-
-            box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.6),
-                inset 0 2px 4px rgba(255, 255, 255, 0.15),
-                inset 0 -4px 8px rgba(0, 0, 0, 0.4);
-        }
 
         .separar {
             display: flex;
@@ -233,33 +214,7 @@
             margin-bottom: 4px;
         }
 
-        .aba {
-            border-collapse: separate;
-            border-spacing: 10px;
-            display: flex;
-            gap: 6px;
-            padding: 1px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
 
-        }
-
-        .aba td {
-            background-color: var(--quadro);
-            border: 2px solid var(--madeira);
-            color: var(--giz);
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-family: 'Special Elite', cursive;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.1s;
-
-        }
-
-        .quadro+.quadro {
-            margin-top: 30px;
-        }
 
         .quadro-dentro {
             position: relative;
@@ -278,27 +233,16 @@
 
         }
 
-        .quadro-dentro::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(180deg,
-                    transparent,
-                    transparent 28px,
-                    rgba(255, 255, 255, 0.025) 28px,
-                    rgba(255, 255, 255, 0.025) 29px);
-            pointer-events: none;
-            border-radius: 3px;
-        }
-
         input[type="number"] {
             border: none;
-            background-color: #f4ecd8;
-            border-radius: 2px;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
             font-family: 'Caveat', cursive;
             color: var(--grafite-escuro);
             font-size: 20px;
-
+            margin: 15px 0;
+            padding: 10px;
+            border-bottom: 2px solid var(--madeira);
         }
 
         input[type="number"]::-webkit-outer-spin-button,
@@ -332,20 +276,57 @@
             color: var(--grafite-escuro);
         }
 
+        .linha-resultado input {
+            width: 90px;
+            height: 30px;
+            margin-left: 6px;
+            margin-bottom: 1px;
+        }
+
         button {
-            height: 50px;
-            width: 50%;
+            background: linear-gradient(135deg, #8a5b34, #5a381d);
             border: none;
-            border-radius: 8px;
+            color: #f4ecd8;
+            padding: 12px 28px;
+            border-radius: 12px;
             font-family: 'Special Elite', cursive;
-            font-size: 15px;
+            font-size: 18px;
             cursor: pointer;
-            transition: transform 0.1s, opacity 0.1s;
-            color: var(--grafite);
+            transition: all 0.25s ease;
+            box-shadow: 0 5px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button::before {
+            content: "📏";
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #9b6b3e, #6a4425);
+        }
+
+        button:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #3a2210;
         }
 
         .caderno+.caderno {
             margin: 30px;
+        }
+
+
+        .letras {
+            font-family: 'Special Elite', cursive;
+            font-size: 10px;
+            color: var(--grafite);
         }
     </style>
 </head>
@@ -362,15 +343,16 @@
 
     <table class="aba">
         <tr>
-            <td id="inicial"> 🔢 Básica </td>
-            <td id="avancada"> 📊 Avançada</td>
-            <td id="log"> 🧮 Logaritmo</td>
-            <td id="equacao"> ✏️ Equações E Texto</td>
-            <td id="IA"> 🤖 MATHeus' IA </td>
+            <td data-emoji="🔢" id="inicial"> Básica </td>
+            <td data-emoji="📊" id="avancada"> Avançada</td>
+            <td data-emoji="🧮" id="log"> Logaritmo</td>
+            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
+            <td data-emoji="🤖" id="IA"> MATHeus' IA </td>
         </tr>
     </table>
-    <div class="mesa">
-        <div class="itens-mesa">
+
+    <main>
+        <div class="itens-main">
             <div class="caderno">
                 <div class="folha-aberta">
 
@@ -399,22 +381,76 @@
 
             <div class="caderno">
                 <div class="folha-aberta">
-                    <div class = "etiqueta">
-                        Raiz e potência.
-                </div>
-
-                <div class = "linha-resultado">
-                    <h3> Raiz:</h3>
-                    <span class="pot" id = "raiz"></span>
-                </div>
-                    <div class = "linha-resultado">
-                        <h3>Potência:</h3>
-                        <span class="pot" id = "potencia"></span>
+                    <div class="etiqueta">
+                        Potência.
                     </div>
+
+                    <div class="linha-resultado">
+                        <h3>Base(A):</h3>
+                        <input type="number" id="base">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Expoente(B):</h3>
+                        <input type="number" id="expoente">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Resultado(X):</h3>
+                        <span id="resultado">A<sup>B</sup> = X</span>
+                    </div>
+
+                    <button onclick="calcularPotencia()">Calcular</button>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="caderno">
+                <div class="folha-aberta">
+                    <span class="etiqueta">Radiciação</span>
+
+                    <div class="linha-resultado">
+                        <h3>Radicando(A): </h3>
+                        <input type="number" id="radicando">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Índice(B): </h3>
+                        <input type="number" id="indice">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Resultado(X):</h3>
+                        <span id="resultadoRaiz"><sup>B</sup>√A = X</span>
+                    </div>
+
+                    <button onclick="raiz()">Calcular</button>
+                </div>
+
+
+            </div>
+            <div class="caderno">
+                <div class="folha-aberta">
+                    <span class="etiqueta">Logaritmo</span>
+                    
+                    <div class = "linha-resultado">
+                        <h3>Base:(b)</h3>
+                        <input type = "number" id ="baseLogaritmo">
+                    </div>
+
+                    <div class = "linha-resultado">
+                        <h3>Logaritmando:(x) </h3>
+                        <input type = "number" id ="logaritmando">
+                    </div>
+
+                    <div class = "linha-resultado">
+                        <h3> Resultado(y): </h3>
+                        <span id = "logaritmo"> log<sub>b</sub>(x) = y</span>
+                    </div>
+
+                    <button onclick="calcularLogaritmo()">Calcular</button>
+                </div>
+            </div>
+    </main>
 
 
     <script src="js/calculo.js"></script>

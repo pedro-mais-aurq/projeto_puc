@@ -163,36 +163,6 @@
             align-items: flex-start;
         }
 
-        .quadro-dentro {
-            position: relative;
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
-            min-height: 90px;
-            border-top: none;
-            background: #1c2b22;
-            border-radius: 6px;
-            padding: 28px;
-
-            box-shadow:
-                inset 0 2px 6px rgba(0, 0, 0, 0.6),
-                inset 0 -2px 4px rgba(255, 255, 255, 0.05);
-
-        }
-
-        .quadro-dentro::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(180deg,
-                    transparent,
-                    transparent 28px,
-                    rgba(255, 255, 255, 0.025) 28px,
-                    rgba(255, 255, 255, 0.025) 29px);
-            pointer-events: none;
-            border-radius: 3px;
-        }
-
         h1 {
             font-family: 'Special Elite', cursive;
             color: var(--giz);
@@ -238,29 +208,7 @@
             margin-bottom: 4px;
         }
 
-        .aba {
-            border-collapse: separate;
-            border-spacing: 10px;
-            display: flex;
-            gap: 6px;
-            padding: 1px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
 
-        }
-
-        .aba td {
-            background-color: var(--quadro);
-            border: 2px solid var(--madeira);
-            color: var(--giz);
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-family: 'Special Elite', cursive;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.1s;
-
-        }
 
         .quadro+.quadro {
             margin-top: 30px;
@@ -319,28 +267,29 @@
         </div>
     </div>
 
+    <table class="aba">
+        <tr>
+            <td data-emoji="🔢" id="inicial"> Básica </td>
+            <td data-emoji="📊" id="avancada"> Avançada</td>
+            <td data-emoji="🧮" id="log"> Logaritmo</td>
+            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
+            <td data-emoji="🤖" id="IA"> MATHeus' IA </td>
+        </tr>
+    </table>
 
     <div class="quadro">
         <div class="quadro-dentro">
-            <table class="aba">
-                <tr>
-                    <td id="inicial"> 🔢 Básica </td>
-                    <td id="avancada"> 📊 Avançada</td>
-                    <td id="log"> 🧮 Logaritmo</td>
-                    <td id="equacao"> ✏️ Equações E Texto</td>
-                    <td id="IA"> 🤖 MATHeus' IA </td>
-                </tr>
-            </table>
+
 
             <div class="calculadora">
                 <h2> Cálculo de Logartimo</h2>
                 <p> Informe o expoente :</p>
-                <input type="number" id = "expoente">
+                <input type="number" id="expoente">
 
                 <p> Informe a base :</p>
-                <input type="number" id = "expoente">
+                <input type="number" id="expoente">
 
-                <button class = "numero" onclick="logaritmo()"> Calcular </button>
+                <button class="numero" onclick="logaritmo()"> Calcular </button>
             </div>
 
             <script src="js/calculo.js"></script>

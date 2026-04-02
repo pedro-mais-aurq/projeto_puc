@@ -125,22 +125,33 @@ function calcular() {
 }
 
 function raiz() {
-  let num = parseFloat(numeroAtual);
-  let res;
+  let radicando = document.getElementById("radicando").value;
+  let indice = document.getElementById("indice").value;
 
-  res = Math.sqrt(num);
 
-  let conta = `SQRT ${num} = ${res}`;
-  historico.push(conta);
-  atualizarHistorico();
+  if (radicando === 0 || indice === 0) {
+    resultado2.innerHTML = "Preencha os valores.";
+    return;
+  }
 
-  numeroAtual = res.toString();
-  operacao = null;
-  numeroGuardado = null;
-  acabouDeCalcular = true;
-  atualizarDisplay();
+  let res = Math.pow(radicando, 1 / indice);
+  res = Number(res.toFixed(4));
+
+  document.getElementById('resultadoRaiz').textContent = res;
+
+  resultadoRaiz.innerHTML = `<sup>${indice}</sup>√${radicando} = ${res}`;
 }
 
+function calcularPotencia() {
+  let base = document.getElementById("base").value;
+  let expoente = document.getElementById("expoente").value;
+
+  let res = base ** expoente;
+
+  document.getElementById('resultado').textContent = res;
+
+  resultado.innerHTML = `${base}<sup>${expoente}</sup> = ${res}`;
+}
 
 function calcularTrig() {
   const input = document.getElementById('entrada');
@@ -178,8 +189,13 @@ function atualizarResultadoTrig(seno, cosseno, tangente) {
   document.getElementById('tangente').textContent = tangente;
 }
 
-function logaritmo() {
-  let expoente = document.getElementById("expoente");
-  let base = document.getElementById("base");
+function calcularLogaritmo() {
+  let x = document.getElementById("logaritmando").value;
+  let b = document.getElementById("baseLogaritmo").value;
+ 
+  let y = Math.log(x) / Math.log(b);
 
+  document.getElementById('logaritmo').textContent = y;
+
+  logaritmo.innerHTML = `log<sub>${b}</sub>${x} = ${y}`; 
 }

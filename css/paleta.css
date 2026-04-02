@@ -32,6 +32,7 @@
      --papel: #F3EEE6;
      --papel-escuro: #E5DDD1;
      --papel-linha: rgba(70, 70, 70, 0.10);
+
 }
 
 
@@ -107,4 +108,55 @@ body {
           0 10px 30px rgba(0, 0, 0, 0.6),
           inset 0 2px 4px rgba(255, 255, 255, 0.15),
           inset 0 -4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+.aba {
+     border-collapse: separate;
+     border-spacing: 10px;
+     display: flex;
+     gap: 6px;
+     padding: 1px;
+     flex-wrap: wrap;
+     margin-bottom: 20px;
+
+}
+
+.aba td {
+     background-color: var(--quadro);
+     border: 2px solid var(--madeira);
+     color: var(--giz);
+     padding: 10px 16px;
+     border-radius: 6px;
+     font-family: 'Special Elite', cursive;
+     font-size: 18px;
+     cursor: pointer;
+     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aba td::before {
+     content: attr(data-emoji);
+     font-size: 1.3em;
+     transition: transform 0.3s ease;
+     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+         display: inline-block;
+}
+
+.aba td:hover {
+     background: linear-gradient(135deg, var(--quadro-op), var(--quadro-light));
+     border-color: var(--madeira-light);
+     transform: translateY(-2px);
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+     color: white;
+}
+
+.aba td:hover::before {
+     transform: scale(1.1) rotate(5deg);
+}
+
+.aba td:active {
+     transform: translateY(1px);
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+     transition: 0.05s;
 }

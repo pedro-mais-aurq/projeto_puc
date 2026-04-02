@@ -120,7 +120,7 @@
             background: #14573b;
         }
 
- 
+
 
         .separar {
             display: flex;
@@ -140,8 +140,6 @@
             letter-spacing: 0.08em;
             text-align: left;
         }
-
-
 
         h2 {
             font-family: 'Caveat', cursive;
@@ -174,30 +172,6 @@
             font-size: 22px;
             padding-bottom: 6px;
             margin-bottom: 4px;
-        }
-
-        .aba {
-            border-collapse: separate;
-            border-spacing: 10px;
-            display: flex;
-            gap: 6px;
-            padding: 1px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-
-        }
-
-        .aba td {
-            background-color: var(--quadro);
-            border: 2px solid var(--madeira);
-            color: var(--giz);
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-family: 'Special Elite', cursive;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.1s;
-
         }
 
         .quadro+.quadro {
@@ -257,15 +231,16 @@
         </div>
     </div>
 
-            <table class="aba">
-                <tr>
-                    <td id="inicial"> 🔢 Básica </td>
-                    <td id="avancada"> 📊 Avançada</td>
-                    <td id="log"> 🧮 Logaritmo</td>
-                    <td id = "equacao"> ✏️ Equações E Texto</td>
-                    <td id = "IA"> 🤖 MATHeus' IA </td>
-                </tr>
-            </table>
+    <table class="aba">
+        <tr>
+            <td data-emoji="🔢" id="inicial"> Básica </td>
+            <td data-emoji="📊" id="avancada"> Avançada</td>
+            <td data-emoji="🧮" id="log"> Logaritmo</td>
+            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
+            <td data-emoji="🤖" id="IA"> MATHeus' IA </td>
+        </tr>
+    </table>
+    
     <div class="quadro">
         <div class="quadro-dentro">
 
