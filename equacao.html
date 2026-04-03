@@ -212,30 +212,36 @@
                 <div class="lousa-box">
 
                     <h2>Primeiro grau</h2>
-                    <p class="primeiro"> ax + b = <span class="resultado">0</span> </p>
-                    <input type="text" placeholder="Digite a equação" id="input-equacao">
-                    <button class="resolver" id="resolver-equacao">Resolver</button>
+                    <p class="primeiro" id = "res1"> ax + b = <span class="resultado">0</span> </p>
+                    <input type="number" placeholder="Informe A" id="a1">
+                    <input type="number" placeholder="Informe B" id="b1">
+                    <input type="number" placeholder="Informe o resultado" id="x1">
+                    <button class="resolver" id="resolver-equacao" onclick="primeiroGrau()">Resolver</button>
                 </div>
 
                 <div class="lousa-box">
                     <h2>Segundo grau</h2>
-                    <p class="segundo"> ax² + bx + c = <span class="resultado">0</span> </p>
-                    <input type="text" placeholder="Digite a equação" id="input-equacao-2">
-                    <button class="resolver" id="resolver-equacao">Resolver</button>
+                    <p class="segundo" id="res2"> ax² + bx + c = <span class="resultado" id="res2">0</span> </p>
+                    <input type="number" placeholder="Informe A" id="a2">
+                    <input type="number" placeholder="Informe B" id="b2">
+                    <input type="number" placeholder="Informe C" id="c2">
+                    <button class="resolver" onclick="segundoGrau()">Resolver</button>
                 </div>
 
                 <div class="lousa-box">
                     <h2>Exponencial</h2>
-                    <p class="terceiro"> a<sup>x</sup> = <span class="resultado">b</span> </p>
-                    <input type="text" placeholder="Digite a equação" id="input-equacao-3">
-                    <button class="resolver" id="resolver-equacao">Resolver</button>
+                    <p class="terceiro" id="res3"> a<sup>x</sup> = <span class="resultado" id="res3">b</span> </p>
+                    <input type="number" placeholder="Informe A" id="a3">
+                    <input type="number" placeholder="Informe B" id="b3">
+                    <button class="resolver"onclick="exponencial()">Resolver</button>
                 </div>
 
                 <div class="lousa-box">
                     <h2>Logarítmica</h2>
-                    <p class="quarto"> log<sub>a</sub>(x) = <span class="resultado">b</span> </p>
-                    <input type="text" placeholder="Digite a equação" id="input-equacao-4">
-                    <button class="resolver" id="resolver-equacao">Resolver</button>
+                    <p class="quarto" id="res4"> log<sub>a</sub>(x) = <span class="resultado" id="res4">b</span> </p>
+                    <input type="number" placeholder="Informe A" id="a4">
+                    <input type="number" placeholder="Informe B" id="b4">
+                    <button class="resolver" onclick="logaritmo()">Resolver</button>
                 </div>
             </main>
         </div>

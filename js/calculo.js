@@ -199,3 +199,16 @@ function calcularLogaritmo() {
 
   logaritmo.innerHTML = `log<sub>${b}</sub>${x} = ${y}`; 
 }
+
+function primeiroGrau() {
+  let a =document.getElementById("a1").value;
+  let b =document.getElementById("b1").value;
+  let x =document.getElementById("x1").value;
+
+  let res = (x - b) / a;
+  res = Number(res.toFixed(4));
+  
+  document.getElementById('res1').textContent = res;
+
+  res1.innerHTML = `${a}x + ${b} = ${x} <br> <span class="resultado">x = ${res}</span>`;
+}
