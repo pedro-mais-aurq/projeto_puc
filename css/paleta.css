@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@400;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/chalker-dust');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
 :root {
 
@@ -14,6 +17,13 @@
 
      --giz: #f5f5f5;
      --giz-escuro: #cfcfcf;
+     --giz-branco: #F4F1E8;
+     --giz-amarelo: #F2D35E;
+     --giz-azul: #7EC8E3;
+     --giz-rosa: #E88C9A;
+     --giz-verde: #9FD39F;
+     --giz-laranja: #E8A35E;
+
 
 
      --vermelho: #a63c2f;
@@ -32,6 +42,8 @@
      --papel: #F3EEE6;
      --papel-escuro: #E5DDD1;
      --papel-linha: rgba(70, 70, 70, 0.10);
+
+     --lousa-fundo: #1D2321;
 
 }
 
@@ -96,7 +108,7 @@ body {
 
 .quadro {
      position: relative;
-     width: 1000px;
+     width: 1100px;
      padding: 16px;
      border-radius: 10px;
 
@@ -139,7 +151,7 @@ body {
      font-size: 1.3em;
      transition: transform 0.3s ease;
      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
-         display: inline-block;
+     display: inline-block;
 }
 
 .aba td:hover {
@@ -159,4 +171,25 @@ body {
      transform: translateY(1px);
      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
      transition: 0.05s;
+}
+
+h1 {
+     font-family: 'Special Elite', cursive;
+     color: var(--giz);
+     font-size: 32px;
+     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+     margin: 0;
+     letter-spacing: 0.08em;
+     text-align: left;
+}
+
+
+
+h2 {
+     font-family: 'Caveat', cursive;
+     color: var(--giz-escuro);
+     font-size: 18px;
+     margin-top: 4px;
+     text-align: left;
+     letter-spacing: 0.05em
 }

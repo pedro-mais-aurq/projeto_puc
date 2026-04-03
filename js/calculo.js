@@ -41,8 +41,8 @@ document.getElementById("avancada").onclick = function () {
   location.href = "avancada.html";
 };
 
-document.getElementById("log").onclick = function () {
-  location.href = "log.html";
+document.getElementById("graficos").onclick = function () {
+  location.href = "graficos.html";
 };
 
 document.getElementById("equacao").onclick = function () {
