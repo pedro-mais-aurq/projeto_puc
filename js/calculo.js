@@ -243,3 +243,24 @@ function segundoGrau() {
      x<sub>2</sub> = ${x2}</span>`;
   }
 }
+
+function exponencial() {
+  let b = document.getElementById("b3").value;
+  let a = document.getElementById("a3").value;
+  let res = document.getElementById('res3');
+  console.log(a, b);
+  if (a != 1 && a > 0 && b > 0) {
+    let x = Math.log(b) / Math.log(a);
+    x = x.toFixed(0);
+
+    res.innerHTML = `${a}<sup>${x}</sup> = ${b} <br> 
+  <span class = "resultado"> x = ${x} </span>`;
+
+  } else if (a = 1 || a < 0) {
+    res.innerHTML = `O valor de A deve ser positivo e diferente de 1`;
+  } 
+  if (b < 0) {
+    console.log("entrou no if");
+    res.innerHTML = `O valor de B deve ser positivo`;
+  }
+}
