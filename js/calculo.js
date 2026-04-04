@@ -135,7 +135,7 @@ function raiz() {
   }
 
   let res = Math.pow(radicando, 1 / indice);
-  res = Number(res.toFixed(4));
+  res = res.toFixed(4);
 
   document.getElementById('resultadoRaiz').textContent = res;
 
@@ -192,23 +192,54 @@ function atualizarResultadoTrig(seno, cosseno, tangente) {
 function calcularLogaritmo() {
   let x = document.getElementById("logaritmando").value;
   let b = document.getElementById("baseLogaritmo").value;
- 
+
   let y = Math.log(x) / Math.log(b);
 
   document.getElementById('logaritmo').textContent = y;
 
-  logaritmo.innerHTML = `log<sub>${b}</sub>${x} = ${y}`; 
+  logaritmo.innerHTML = `log<sub>${b}</sub>${x} = ${y}`;
 }
 
 function primeiroGrau() {
-  let a =document.getElementById("a1").value;
-  let b =document.getElementById("b1").value;
-  let x =document.getElementById("x1").value;
+  let a = document.getElementById("a1").value;
+  let b = document.getElementById("b1").value;
+  let x = document.getElementById("x1").value;
 
   let res = (x - b) / a;
-  res = Number(res.toFixed(4));
-  
+  res = res.toFixed(4);
+
   document.getElementById('res1').textContent = res;
 
   res1.innerHTML = `${a}x + ${b} = ${x} <br> <span class="resultado">x = ${res}</span>`;
+}
+
+function segundoGrau() {
+  let a = document.getElementById("a2").value.trim();
+  let b = document.getElementById("b2").value.trim();
+  let c = document.getElementById("c2").value.trim();
+  let res = document.getElementById('res2');
+
+  let delta = (b * b) - (4 * a * c);
+
+  if (delta < 0) {
+    res.innerHTML = `Delta = ${delta}, não possui raízes reais. `;
+
+  } else if (delta == 0) {
+    let x = (-b) / (2 * a);
+    res = x.toFixed(2);
+
+    res.innerHTML = `${a}x<sup>2</sup> + ${b} + ${c} = 0 <br>
+    <span class = "resultado">x = ${x}`
+
+  } else if (delta > 0) {
+    let x1 = (-b - Math.sqrt(delta)) / (2 * a);
+    let x2 = (-b + Math.sqrt(delta)) / (2 * a);
+    x1 = x1.toFixed(2);
+    x2 = x2.toFixed(2);
+
+    res.innerHTML = `${a}x<sup>2</sup> + ${b}x + ${c} = 0 <br>
+     <span class = "resultado">Δ = ${delta}<br> 
+     x<sub>1</sub> = ${x1} <br> 
+     x<sub>2</sub> = ${x2}</span>`;
+  }
 }
