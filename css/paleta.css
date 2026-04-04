@@ -122,6 +122,11 @@ body {
           inset 0 -4px 8px rgba(0, 0, 0, 0.4);
 }
 
+.quadro+.quadro {
+     margin-top: 30px;
+}
+
+
 
 .aba {
      border-collapse: separate;

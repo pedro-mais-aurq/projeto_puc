@@ -11,20 +11,6 @@
     <link rel="stylesheet" href="css/paleta.css" />
 
     <style>
-        body {
-            background-color: var(--madeira-dark);
-            flex-direction: column;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.2), transparent 50%);
-
-            background-blend-mode: overlay;
-        }
-
         main {
             width: 1100px;
             min-height: 500px;
@@ -160,79 +146,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
-
-
-        .separar {
-            display: flex;
-            gap: 35px;
-            flex-wrap: wrap;
-            align-items: flex-start;
-        }
-
-        h1 {
-            font-family: 'Special Elite', cursive;
-            color: var(--giz);
-            font-size: 32px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            margin: 0;
-            letter-spacing: 0.08em;
-            text-align: left;
-        }
-
-
-
-        h2 {
-            font-family: 'Caveat', cursive;
-            color: var(--giz-escuro);
-            font-size: 18px;
-            margin-top: 4px;
-            text-align: left;
-            letter-spacing: 0.05em
-        }
-
-        .risco {
-            height: 3px;
-            background: linear-gradient(90deg, var(--giz-escuro), transparent);
-            border-radius: 2px;
-            margin-top: 14px;
-            opacity: 0.4;
-        }
-
-        p {
-            font-family: 'Caveat', cursive;
-            color: var(--giz);
-            font-size: 25px;
-            margin-bottom: 4px;
-            padding-bottom: 6px;
-        }
-
-        .riscado {
-            color: var(--giz);
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
-            font-size: 22px;
-            padding-bottom: 6px;
-            margin-bottom: 4px;
-        }
-
-
-
-        .quadro-dentro {
-            position: relative;
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
-            min-height: 90px;
-            border-top: none;
-            background: #1c2b22;
-            border-radius: 6px;
-            padding: 28px;
-
-            box-shadow:
-                inset 0 2px 6px rgba(0, 0, 0, 0.6),
-                inset 0 -2px 4px rgba(255, 255, 255, 0.05);
-
-        }
-
         input[type="number"] {
             border: none;
             background-color: rgba(0, 0, 0, 0.05);
@@ -358,16 +271,16 @@
 
                     <div class="linha-resultado">
                         <h3>Seno:</h3>
-                        <span class="trig" id="seno"></span>
+                        <span class="trig" id="seno"><sup>CO</sup>/<sub>HI</sub></span>
 
                     </div>
                     <div class="linha-resultado">
                         <h3>Cosseno:</h3>
-                        <span id="cosseno"></span>
+                        <span id="cosseno"><sup>CA</sup>/<sub>HI</sub></span>
                     </div>
                     <div class="linha-resultado">
                         <h3>Tangente:</h3>
-                        <span id="tangente"></span>
+                        <span id="tangente"><sup>CO</sup>/<sub>CA</sub></span>
                     </div>
 
 
