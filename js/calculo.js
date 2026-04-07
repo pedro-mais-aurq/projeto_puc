@@ -193,7 +193,7 @@ function calcularLogaritmo() {
   let x = document.getElementById("logaritmando").value;
   let b = document.getElementById("baseLogaritmo").value;
 
-  let y = Math.log(x) / Math.log(b);
+  let y = formatar(Math.log(x) / Math.log(b));
 
   document.getElementById('logaritmo').textContent = y;
 
@@ -205,8 +205,7 @@ function primeiroGrau() {
   let b = document.getElementById("b1").value;
   let x = document.getElementById("x1").value;
 
-  let res = (x - b) / a;
-  res = res.toFixed(4);
+  let res = formatar((x - b) / a);
 
   document.getElementById('res1').textContent = res;
 
@@ -225,19 +224,17 @@ function segundoGrau() {
     res.innerHTML = `Delta = ${delta}, não possui raízes reais. `;
 
   } else if (delta == 0) {
-    let x = (-b) / (2 * a);
-    res = x.toFixed(2);
+    let x = formatar((-b) / (2 * a));
 
-    res.innerHTML = `${a}x<sup>2</sup> + ${b} + ${c} = 0 <br>
-    <span class = "resultado">x = ${x}`
+    res.innerHTML = `(${a})x<sup>2</sup> + (${b}) + (${c}) = 0 <br>
+      <span class = "resultado">Δ = 0<br>
+      x = ${x}</span>`;
 
   } else if (delta > 0) {
-    let x1 = (-b - Math.sqrt(delta)) / (2 * a);
-    let x2 = (-b + Math.sqrt(delta)) / (2 * a);
-    x1 = x1.toFixed(2);
-    x2 = x2.toFixed(2);
+    let x1 = formatar((-b - Math.sqrt(delta)) / (2 * a));
+    let x2 = formatar((-b + Math.sqrt(delta)) / (2 * a));
 
-    res.innerHTML = `${a}x<sup>2</sup> + ${b}x + ${c} = 0 <br>
+    res.innerHTML = `(${a})x<sup>2</sup> + (${b})x + (${c}) = 0 <br>
      <span class = "resultado">Δ = ${delta}<br> 
      x<sub>1</sub> = ${x1} <br> 
      x<sub>2</sub> = ${x2}</span>`;
@@ -248,19 +245,31 @@ function exponencial() {
   let b = document.getElementById("b3").value;
   let a = document.getElementById("a3").value;
   let res = document.getElementById('res3');
-  console.log(a, b);
+
   if (a != 1 && a > 0 && b > 0) {
-    let x = Math.log(b) / Math.log(a);
-    x = x.toFixed(0);
+    let x = formatar(Math.log(b) / Math.log(a));
 
     res.innerHTML = `${a}<sup>${x}</sup> = ${b} <br> 
   <span class = "resultado"> x = ${x} </span>`;
 
   } else if (a = 1 || a < 0) {
     res.innerHTML = `O valor de A deve ser positivo e diferente de 1`;
-  } 
+  }
   if (b < 0) {
-    console.log("entrou no if");
     res.innerHTML = `O valor de B deve ser positivo`;
   }
+}
+
+function formatar(valor) {
+  return Number(valor.toFixed(2));
+}
+
+function expressaoLog() {
+  let a = document.getElementById("a4").value;
+  let b = document.getElementById("b4").value;
+  let x = document.getElementById("x4").value;
+  let res = document.getElementById('res4');
+
+  res.innerHTML = `${a}^<sup>${b}</sup> = ${x}`;
+
 }
