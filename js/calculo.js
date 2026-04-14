@@ -53,6 +53,10 @@ document.getElementById("IA").onclick = function () {
   location.href = "IA.html";
 };
 
+document.getElementById("matriz").onclick = function () {
+  location.href = "matriz.html";
+};
+
 function atualizarDisplay() {
   document.getElementById('valor').textContent = numeroAtual;
 }
@@ -166,7 +170,20 @@ function calcularTrig() {
     return;
   }
 
+  if(deg>360){
+    while(deg>360){
+      deg-=360;
+    }
+  }
+
+  if(deg<0){
+    while(deg<0){
+      deg+=360;
+    }
+  }
   let rad = (deg * Math.PI) / 180;
+
+  
 
   let seno = Math.sin(rad);
   let cosseno = Math.cos(rad);
@@ -176,6 +193,9 @@ function calcularTrig() {
   cosseno = parseFloat(cosseno.toFixed(6));
   tangente = parseFloat(tangente.toFixed(6));
 
+if(deg == 90|| deg == 270){
+    tangente = "Indefinido"
+  }
 
   atualizarResultadoTrig(seno, cosseno, tangente);
 
@@ -203,13 +223,12 @@ function calcularLogaritmo() {
 function primeiroGrau() {
   let a = document.getElementById("a1").value;
   let b = document.getElementById("b1").value;
-  let x = document.getElementById("x1").value;
 
-  let res = formatar((x - b) / a);
+  let res = formatar((- b) / a);
 
   document.getElementById('res1').textContent = res;
 
-  res1.innerHTML = `${a}x + ${b} = ${x} <br> <span class="resultado">x = ${res}</span>`;
+  res1.innerHTML = `(${a})x + (${b}) = 0 <br> <span class="resultado">x = ${res}</span>`;
 }
 
 function segundoGrau() {
@@ -249,7 +268,7 @@ function exponencial() {
   if (a != 1 && a > 0 && b > 0) {
     let x = formatar(Math.log(b) / Math.log(a));
 
-    res.innerHTML = `${a}<sup>${x}</sup> = ${b} <br> 
+    res.innerHTML = `${a}<sup>x</sup> = ${b} <br> Log<sub>${a}</sub> ${b} = x <br> Log ${b} / Log ${a} = x <br> ${formatar(Math.log(b))} / ${formatar(Math.log(a))} = x<br>
   <span class = "resultado"> x = ${x} </span>`;
 
   } else if (a = 1 || a < 0) {
@@ -257,6 +276,67 @@ function exponencial() {
   }
   if (b < 0) {
     res.innerHTML = `O valor de B deve ser positivo`;
+  }
+}
+
+function criacao(x){
+  let a,b;
+  if(x==1){
+    a = document.getElementById("linha0").value;
+    b = document.getElementById("col0").value;
+  } else{
+    a = document.getElementById("linha1").value;
+    b = document.getElementById("col1").value;
+  }
+  
+  let res;
+  if(x==1){
+    res = document.getElementById("matriz1");
+  } else{
+    res = document.getElementById("matriz2");
+  }
+  res = Array.from({ length: a }, () => new Array(b).fill(0));
+  res.innerHTML = ``;
+  console.log(res)
+  if(a <= 0 || b<= 0){
+    res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
+    return(0);
+  }
+  for(let i=0; i<a; i++){
+    for(let j=0; j<b; j++){
+      res.innerHTML += `<input type="number" placeholder=${res[i][j]}>`;
+    }
+    res.innerHTML += `<br>`;
+  }
+}
+
+function matrizRes(mat1, mat2, op){
+  let result = document.getElementById("matrizRes")
+  result = [];
+  result.innerHTML = ``
+
+  switch(op){
+    case '+': 
+    for (let i = 0; i < mat1.length; i++) {
+    result[i] = [];
+    for (let j = 0; j < mat1[i].length; j++) {
+        result[i][j] = mat1[i][j] + mat2[i][j];
+      }
+    }
+    break;
+    case '*': 
+    if(mat1.length!=mat2.length){
+      result.innerHTML = `O tamanho da linha da matriz A deve ser igual a coluna da matriz B`
+      return(0)
+    }
+    //fazer a multiplicação de matriz
+    for (let i = 0; i < mat1.length; i++) {
+      result[i] = [];
+      for (let j = 0; j < mat1[i].length; j++) {
+          result[i][j] = mat1[i][j] - mat2[i][j];
+        }
+    }
+    break;
   }
 }
 

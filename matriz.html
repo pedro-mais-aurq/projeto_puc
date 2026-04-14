@@ -114,6 +114,7 @@
                 inset 0 -2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        
         .primeiro {
             color: var(--giz-azul);
         }
@@ -138,7 +139,7 @@
             position: relative;
             z-index: 2;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 50px;
             padding: 15px;
         }
@@ -184,7 +185,6 @@
             transform: scale(1.1) rotate(15deg);
         }
     </style>
-
 </head>
 
 <body>
@@ -211,44 +211,51 @@
         <div class="quadro-preto">
             <main>
                 <div class="lousa-box">
-
-                    <h2>Primeiro grau</h2>
-                    <p class="primeiro" id = "res1"> ax + b = <span class="resultado">0</span> </p>
-                    <input type="number" placeholder="Informe A" id="a1">
-                    <input type="number" placeholder="Informe B" id="b1">
-                    <button class="resolver" id="resolver-equacao" onclick="primeiroGrau()">Resolver</button>
+                    <h2>Qual o tamanho da primeira matriz?</h2>
+                    <input type="number" placeholder="Linhas" id="linha0">
+                    <p> X </p>
+                    <input type="number" placeholder="Colunas" id="col0">
+                    <button class="resolver" id="criar-matriz" onclick="criacao(1)">Criar</button>
                 </div>
 
                 <div class="lousa-box">
-                    <h2>Segundo grau</h2>
-                    <p class="segundo" id="res2"> ax² + bx + c = <span class="resultado" id="res2">0</span> </p>
-                    <input type="number" placeholder="Informe A" id="a2">
-                    <input type="number" placeholder="Informe B" id="b2">
-                    <input type="number" placeholder="Informe C" id="c2">
-                    <button class="resolver" onclick="segundoGrau()">Resolver</button>
+                    <h2>Qual o tamanho da segunda matriz?</h2>
+                    <input type="number" placeholder="Linhas" id="linha1">
+                    <p> X </p>
+                    <input type="number" placeholder="Colunas" id="col1">
+                    <button class="resolver" id="criar-matriz" onclick="criacao(2)">Criar</button>
                 </div>
 
-                <div class="lousa-box">
-                    <h2>Exponencial</h2>
-                    <p class="terceiro" id="res3"> a<sup>x</sup> = <span class="resultado" id="res3">b</span> </p>
-                    <input type="number" placeholder="Informe A" id="a3">
-                    <input type="number" placeholder="Informe B" id="b3">
-                    <button class="resolver"onclick="exponencial()">Resolver</button>
-                </div>
+                <div class="lousa-box" id="matriz1">
+                    <input type="number" placeholder="0">
+                    <input type="number" placeholder="0">
+                    <br>
+                    <input type="number" placeholder="0">
+                    <input type="number" placeholder="0">
 
-                <div class="lousa-box">
-                    <h2>Logarítmica</h2>
-                    <p class="quarto" id="res4"> log<sub>a</sub>(x) = <span class="resultado" id="res4">b</span> </p>
-                    <input type="number" placeholder="Informe A" id="a4">
-                    <input type="text" placeholder="Informe X" id="x4">
-                    <input type="number" placeholder="Informe B" id="b4">
-                    <button class="resolver" onclick="expressaoLog()">Resolver</button>
+                </div>
+                <div class="lousa-box" id="matriz2">
+                    <input type="number" placeholder="0">
+                    <input type="number" placeholder="0">
+                    <br>
+                    <input type="number" placeholder="0">
+                    <input type="number" placeholder="0">
+
+                </div>
+                <div class="lousa-box" id="matrizResultado">
+                    <h2>Matriz resultado</h2>
+                    <p class="matrizRes">
+                        
+                    </p>
+                    
                 </div>
             </main>
         </div>
+            
     </div>
-
-
-
+    
     <script src="js/calculo.js"></script>
+    
 </body>
+
+</html>
