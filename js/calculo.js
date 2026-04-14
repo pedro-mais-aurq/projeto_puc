@@ -329,13 +329,7 @@ function matrizRes(mat1, mat2, op){
       result.innerHTML = `O tamanho da linha da matriz A deve ser igual a coluna da matriz B`
       return(0)
     }
-    //fazer a multiplicação de matriz
-    for (let i = 0; i < mat1.length; i++) {
-      result[i] = [];
-      for (let j = 0; j < mat1[i].length; j++) {
-          result[i][j] = mat1[i][j] - mat2[i][j];
-        }
-    }
+    result = Math.multiply(mat1, mat2)
     break;
   }
 }
