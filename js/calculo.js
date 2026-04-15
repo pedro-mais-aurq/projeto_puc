@@ -146,6 +146,41 @@ function raiz() {
   resultadoRaiz.innerHTML = `<sup>${indice}</sup>√${radicando} = ${res}`;
 }
 
+function juro() {
+  let c = document.getElementById("capital").value;
+  let i = document.getElementById("taxa").value;
+  let t = document.getElementById("tempo").value;
+  let j = document.getElementById("juro");
+
+  if (c <= 0 || i <= 0 || t <= 0) {
+    resultado2.innerHTML = "Preencha com valores válidos.";
+    return;
+  }
+  
+
+  let res = (c*i*t)/100;
+
+  j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`;
+  //document.getElementById('juro').textContent = res;
+}
+function montante() {
+  let c = document.getElementById("capitalComposto").value;
+  let i = document.getElementById("taxaComposto").value;
+  let t = document.getElementById("tempoComposto").value;
+  let m = document.getElementById("montante");
+
+  if (c <= 0 || i <= 0 || t <= 0) {
+    resultado2.innerHTML = "Preencha com valores válidos.";
+    return;
+  }
+  
+
+  let res = c*(1+i)**t;
+
+  m.innerHTML = `${c}*(1+${i})^<sup>${t}</sup> = ${res}`;
+  //document.getElementById('juro').textContent = res;
+}
+
 function calcularPotencia() {
   let base = document.getElementById("base").value;
   let expoente = document.getElementById("expoente").value;
@@ -280,58 +315,81 @@ function exponencial() {
 }
 
 function criacao(x){
-  let a,b;
+  let a,b,res;
   if(x==1){
     a = document.getElementById("linha0").value;
     b = document.getElementById("col0").value;
+    res = document.getElementById("matriz1");
   } else{
     a = document.getElementById("linha1").value;
     b = document.getElementById("col1").value;
-  }
-  
-  let res;
-  if(x==1){
-    res = document.getElementById("matriz1");
-  } else{
     res = document.getElementById("matriz2");
   }
-  res = Array.from({ length: a }, () => new Array(b).fill(0));
+  
   res.innerHTML = ``;
-  console.log(res)
   if(a <= 0 || b<= 0){
     res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
-    return(0);
+    return;
   }
   for(let i=0; i<a; i++){
     for(let j=0; j<b; j++){
-      res.innerHTML += `<input type="number" placeholder=${res[i][j]}>`;
+      res.innerHTML += `<input type="number" placeholder=0>`;
     }
     res.innerHTML += `<br>`;
   }
 }
 
-function matrizRes(mat1, mat2, op){
-  let result = document.getElementById("matrizRes")
-  result = [];
+function matrizRes(op){
+  let mat1 = document.getElementById('matriz1');
+  let mat2 = document.getElementById('matriz2');
+  let result = document.getElementById("matrizResultado")
+  let matriz = [];
+  console.log(mat1)
   result.innerHTML = ``
 
   switch(op){
     case '+': 
+    if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
+      result.innerHTML = `As matrizes devem ter a mesma dimensão`
+      return
+    }
     for (let i = 0; i < mat1.length; i++) {
-    result[i] = [];
+    matriz[i] = [];
     for (let j = 0; j < mat1[i].length; j++) {
-        result[i][j] = mat1[i][j] + mat2[i][j];
+        matriz[i][j] = mat1[i][j] + mat2[i][j];
+      }
+    }
+    break;
+    case '-': 
+    if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
+      result.innerHTML = `As matrizes devem ter a mesma dimensão`
+      return
+    }
+    for (let i = 0; i < mat1.length; i++) {
+    matriz[i] = [];
+    for (let j = 0; j < mat1[i].length; j++) {
+        matriz[i][j] = mat1[i][j] - mat2[i][j];
       }
     }
     break;
     case '*': 
-    if(mat1.length!=mat2.length){
+    if(mat1.length!=mat2[0].length){
       result.innerHTML = `O tamanho da linha da matriz A deve ser igual a coluna da matriz B`
-      return(0)
+      return
     }
     result = Math.multiply(mat1, mat2)
     break;
+    case 't':
+      const transpose = (m) => m[0].map((_, i) => m.map(row => row[i]))
+      matriz = transpose(mat1)
+      break;
   }
+  matriz.forEach(row => {
+    row.forEach(item => {
+      res.innerHTML += `[${item}]`
+    });
+    res.innerHTML += `<br>`
+  });
 }
 
 function formatar(valor) {

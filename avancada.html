@@ -364,6 +364,67 @@
                     <button onclick="calcularLogaritmo()">Calcular</button>
                 </div>
             </div>
+
+            <div class="caderno">
+                <div class="folha-aberta">
+                    <span class="etiqueta">Juros Simples</span>
+
+                    <div class="linha-resultado">
+                        <h3>Capital(C): </h3>
+                        <input type="number" id="capital">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Taxa(I): </h3>
+                        <input type="number" id="taxa">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Tempo(T): </h3>
+                        <input type="number" id="tempo">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Juro(J):</h3>
+                        <span id="juro"><sup>C*I*T</sup> / <sub>100</sub> = J</span>
+                    </div>
+
+                    <button onclick="juro()">Calcular</button>
+                </div>
+
+                
+
+            </div>
+
+            <div class="caderno">
+                <div class="folha-aberta">
+                    <span class="etiqueta">Juros Compostos</span>
+
+                    <div class="linha-resultado">
+                        <h3>Capital(C): </h3>
+                        <input type="number" id="capitalComposto">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Taxa(I): </h3>
+                        <input type="number" id="taxaComposto">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Tempo(T): </h3>
+                        <input type="number" id="tempoComposto">
+                    </div>
+
+                    <div class="linha-resultado">
+                        <h3>Montante(M):</h3>
+                        <span id="montante">C*(1+I)^<sup>t</sup> = M</span>
+                    </div>
+
+                    <button onclick="montante()">Calcular</button>
+                </div>
+
+
+            </div>
     </main>
 
 
