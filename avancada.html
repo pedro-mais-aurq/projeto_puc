@@ -53,7 +53,7 @@
         .itens-main {
             position: relative;
             display: flex;
-            gap: 24px;
+            gap: 19px;
             align-items: flex-start;
             flex-wrap: wrap;
             z-index: 1;
@@ -284,9 +284,9 @@
                         <span id="tangente"></span>
                     </div>
 
-
                     <input type="number" id="entrada" placeholder="Informe o valor do grau a ser calculado.">
                     <button onclick="calcularTrig()">Calcular</button>
+                    
                     <div class="etiqueta">
                         Trigonometria
                     </div>
@@ -339,9 +339,8 @@
 
                     <button onclick="raiz()">Calcular</button>
                 </div>
-
-
             </div>
+
             <div class="caderno">
                 <div class="folha-aberta">
                     <span class="etiqueta">Logaritmo</span>
@@ -386,13 +385,11 @@
 
                     <div class="linha-resultado">
                         <h3>Juro(J):</h3>
-                        <span id="juro"><sup>C*I*T</sup> / <sub>100</sub> = J</span>
+                        <span id="juro"><sup>C×I×T</sup> / <sub>100</sub> = J</span>
                     </div>
 
                     <button onclick="juro()">Calcular</button>
-                </div>
-
-                
+                </div>   
 
             </div>
 
@@ -416,15 +413,14 @@
                     </div>
 
                     <div class="linha-resultado">
-                        <h3>Montante(M):</h3>
-                        <span id="montante">C*(1+I)^<sup>t</sup> = M</span>
+                        <h3 style = "font-size: 20px;">Montante(M):</h3>
+                        <span id="montante" style="font-size: 17px;"> C×(1+I)<sup>t</sup> = M</span>
                     </div>
 
                     <button onclick="montante()">Calcular</button>
                 </div>
-
-
             </div>
+
     </main>
 
 
