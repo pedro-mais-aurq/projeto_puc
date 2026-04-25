@@ -15,139 +15,132 @@
             box-sizing: border-box;
         }
 
-        .quadro-preto {
+        .folha {
             position: relative;
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
             min-height: 90px;
             border-top: none;
-            background: #1b1b1b;
+            background: #f8f6ef;
             border-radius: 6px;
             padding: 28px;
             display: flex;
             flex-direction: row;
             box-shadow:
-                inset 0 2px 6px rgba(0, 0, 0, 0.6),
-                inset 0 -2px 4px rgba(255, 255, 255, 0.05);
+                inset 0 2px 6px rgba(255, 255, 255, 0.6),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+            max-width: 1100px;
+            width: 100%;
         }
 
-        .quadro-preto::before {
-            content: "";
+
+        .folha::before {
+            content: '';
             position: absolute;
             inset: 0;
-            background: url(textura.jpg) center/cover no-repeat;
-            opacity: 0.05;
-            mix-blend-mode: screen;
-            pointer-events: none;
+            background-image:
+
+                linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+
+
+                linear-gradient(to right, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+
+
+                linear-gradient(to right, rgba(0, 0, 0, 0.25) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 2px, transparent 2px);
+
+            background-size:
+                10px 10px,
+
+                10px 10px,
+
+                50px 50px,
+
+                50px 50px,
+
+                100px 100px,
+
+                100px 100px;
+
             z-index: 1;
+            pointer-events: none;
         }
 
-        .lousa-box {
-            position: relative;
-            min-width: 0;
-            padding: 30px 40px;
-            background: rgba(0, 0, 0, 0.08);
-            color: #f4f1e8;
-            text-align: center;
+        .postit {
+            background-color: #F4F1E8;
+            border: solid rgb(186, 190, 166) 1px;
+            border-radius: 2px;
             z-index: 2;
-            min-height: 220px;
-
+            width: 495px;
+            margin: 5px;
+            align-content: center;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-
-        .lousa-box::before {
-            content: "";
-            position: absolute;
-            inset: -10px;
-            border: 3px solid rgba(244, 241, 232, 0.3);
-            border-radius: 6px;
-            filter: blur(0.3px);
-            transform: rotate(-0.5deg);
-            box-shadow:
-                0 0 2px rgba(255, 255, 255, 0.4),
-                0 0 5px rgba(255, 255, 255, 0.15);
-            z-index: -1;
-        }
-
-        .lousa-box::after {
-            content: "";
-            position: absolute;
-            inset: -8px;
-            border: 2px solid rgba(244, 241, 232, 0.45);
-            border-radius: 8px;
-            transform: rotate(-0.1deg) scale(1.005);
-            filter: blur(0.5px);
-            z-index: -1;
-        }
-
-        .lousa-box h2 {
-            margin: 0 0 15px;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-            font-family: 'Chalker Dust', cursive;
-        }
-
-        .lousa-box p {
-            margin: 0;
-            font-size: 1.5rem;
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-            font-family: 'Gloria Hallelujah', cursive;
-        }
-
-        .lousa-box input {
-            margin-top: 20px;
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1.2rem;
-            font-family: 'Comic Sans', cursive;
-            background: rgba(255, 255, 255, 0.1);
-            color: #f4f1e8;
-            box-shadow:
-                inset 0 2px 4px rgba(255, 255, 255, 0.1),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        
-        .primeiro {
-            color: var(--giz-azul);
-        }
-
-        .segundo {
-            color: var(--giz-laranja);
-        }
-
-        .terceiro {
-            color: var(--giz-verde);
-        }
-
-        .quarto {
-            color: var(--giz-amarelo);
-        }
-
-        .resultado {
-            color: var(--giz-rosa);
-        }
-
-        main {
+            align-items: center;
+            transition: transform 0.2s;
             position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 50px;
-            padding: 15px;
         }
 
-        .resolver {
-            width: 100%;
+        .adesivo {
+            content: '';
+            background: rgba(255, 200, 80, 0.6);
+            position: absolute;
+            top: -8px;
+            left: 40px;
+            opacity: 0.8;
+            width: 30px;
+            height: 14px;
+            z-index: 2;
+            border-radius: 1px;
+            transform: rotate(-2deg);
+            pointer-events: none;
+        }
+
+        .postit:hover {
+            transform: rotate(1deg) translateY(-2px);
+        }
+
+        .resolvido {
+            background: black;
+        }
+
+        .postit h2,
+        p {
+            font-size: 1.4rem;
+
+            color: black;
+            text-align: center;
+        }
+
+        .postit h1 {
+            font-size: 1.8rem;
+            font-family: 'Caveat', cursive;
+            color: black;
+        }
+
+        .postit input {
+            margin: 10px;
+            width: 50%;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: #0c0c0c;
+            border: solid 2px gray;
+            font-family: 'Caveat', cursive;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .criar {
+            width: 50%;
             padding: 11px 0;
-            margin-top: 12px;
+            margin: 12px;
             border-radius: 6px;
             border: none;
             cursor: pointer;
@@ -155,34 +148,62 @@
             font-size: 1.15rem;
             font-weight: 600;
             letter-spacing: 0.06em;
-            background: rgba(0, 0, 0, 0.1);
-            color: #F4F1E8;
+            background: #3a2e1e;
+            color: #f4ecd8;
             box-shadow:
                 0 4px 14px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: transform 0.12s ease, box-shadow 0.12s ease;
         }
 
-        .resolver:hover {
+        .criar:hover {
             background: rgba(0, 0, 0, 0.2F);
             transform: translateY(-2px);
             box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
         }
 
-        .resolver:active {
+        .criar:active {
             transform: translateY(1px);
             transition: 0.05s;
         }
 
-        .resolver::before {
+        .criar::before {
             content: '✎';
             transition: transform 0.3s ease;
             display: inline-block;
             margin-right: 8px;
         }
 
-        .resolver:hover::before {
+        .criar:hover::before {
             transform: scale(1.1) rotate(15deg);
+        }
+
+        .painel-matrizes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 28px;
+        }
+
+        .matriz-grid {
+            display: grid;
+            gap: 6px;
+            justify-content: start;
+            padding-bottom: 10px;
+        }
+
+        .matriz-grid input {
+            width: 50px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .risco {
+            height: 2px;
+            width: 95%;
+            opacity: 0.8;
+            background: repeating-linear-gradient(90deg, #b08060 0px, #b08060 6px, transparent 6px, transparent 10px);
+            position: relative;
         }
     </style>
 </head>
@@ -207,60 +228,62 @@
         </tr>
     </table>
 
-    <div class="quadro">
-        <div class="quadro-preto">
-            <main>
-                <div class="lousa-box">
-                    <h2>Qual o tamanho da primeira matriz?</h2>
-                    <input type="number" placeholder="Linhas(i)" id="linha0">
-                    <p> X </p>
-                    <input type="number" placeholder="Colunas(j)" id="col0">
-                    <button class="resolver" id="criar-matriz" onclick="criacao(1)">Criar</button>
-                </div>
+    <div class="folha">
+        <div class="painel-matrizes">
+            <div class="postit">
+                <div class="adesivo"></div>
+                <h1> Matriz A</h1>
+                <div class="risco"></div>
+                <h2>Qual o tamanho da primeira matriz?</h2>
+                <input type="number" placeholder="Linhas(i)" id="linha0">
+                <p> X </p>
+                <input type="number" placeholder="Colunas(j)" id="col0">
+                <button class="criar" id="criar-matriz" onclick="criacao(1)">Criar</button>
+            </div>
 
-                <div class="lousa-box">
+            <div class="postit">
+                <div class="adesivo"></div>
+                <h1> Matriz B</h2>
+                    <div class="risco"></div>
                     <h2>Qual o tamanho da segunda matriz?</h2>
                     <input type="number" placeholder="Linhas" id="linha1">
                     <p> X </p>
                     <input type="number" placeholder="Colunas" id="col1">
-                    <button class="resolver" id="criar-matriz" onclick="criacao(2)">Criar</button>
+                    <button class="criar" id="criar-matriz2" onclick="criacao(2)">Criar</button>
+            </div>
+
+            <div class="postit">
+                <h2>Matriz criada</h2>
+                <div class="matriz-grid" id="matriz1"></div>
+            </div>
+
+            <div class="postit">
+                <h2>Matriz criada</h2>
+                <div class="matriz-grid" id="matriz2"></div>
+            </div>
+
+            <div class="postit" id="matrizResultado">
+                <h2>Matriz resultado</h2>
+                <p class="matrizRes"> []
+                </p>
+            </div>
+
+            <div class="postit" id="ops">
+                <h2>Operações</h2>
+                <div class="botoes">
+                    <button class="opMat" onclick="matrizRes('+')">+</button>
+                    <button class="opMat" onclick="matrizRes('-')">-</button>
+                    <button class="opMat" onclick="matrizRes('*')">X</button>
+                    <button class="opMat" onclick="matrizRes('t')">Transposta</button>
                 </div>
 
-                <div class="lousa-box" id="matriz1">
+            </div>
 
-                </div>
-                <div class="lousa-box" id="matriz2">
-
-                </div>
-                <div class="lousa-box" id="matrizResultado">
-                    <h2>Matriz resultado</h2>
-                    <p class="matrizRes"> []
-                        
-                    </p>
-                    
-                </div>
-
-                </div>
-                <div class="lousa-box" id="ops">
-                    <h2>Operações</h2>
-                    <div class="botoes">
-                        <button class="opMat" onclick="matrizRes('+')">+</button>
-                        <button class="opMat" onclick="matrizRes('-')">-</button>
-                        <button class="opMat" onclick="matrizRes('*')">X</button>
-                        <button class="opMat" onclick="matrizRes('t')">Transposta</button>
-                    </div>
-                        
-                    </p>
-                    
-                </div>
-
-            </main>
         </div>
-            
     </div>
-    
-    <script src="js/calculo.js"></script>
-    
+
 </body>
+
+<script src="js/calculo.js"></script>
 
 </html>

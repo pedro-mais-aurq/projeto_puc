@@ -313,29 +313,31 @@ function exponencial() {
     res.innerHTML = `O valor de B deve ser positivo`;
   }
 }
-
 function criacao(x){
   let a,b,res;
+
   if(x==1){
-    a = document.getElementById("linha0").value;
-    b = document.getElementById("col0").value;
+    a = parseInt(document.getElementById("linha0").value);
+    b = parseInt(document.getElementById("col0").value);
     res = document.getElementById("matriz1");
   } else{
-    a = document.getElementById("linha1").value;
-    b = document.getElementById("col1").value;
+    a = parseInt(document.getElementById("linha1").value);
+    b = parseInt(document.getElementById("col1").value);
     res = document.getElementById("matriz2");
   }
-  
-  res.innerHTML = ``;
-  if(a <= 0 || b<= 0){
+
+  res.innerHTML = '';
+
+  if(a <= 0 || b <= 0){
     res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
     return;
   }
-  for(let i=0; i<a; i++){
-    for(let j=0; j<b; j++){
-      res.innerHTML += `<input type="number" placeholder=0>`;
-    }
-    res.innerHTML += `<br>`;
+  
+  res.classList.add("matriz-grid");
+  res.style.gridTemplateColumns = `repeat(${b}, 50px)`;
+
+  for(let i=0; i<a*b; i++){
+    res.innerHTML += `<input type="number" placeholder="0">`;
   }
 }
 
