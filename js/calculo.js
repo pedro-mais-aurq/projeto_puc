@@ -49,9 +49,6 @@ document.getElementById("equacao").onclick = function () {
   location.href = "equacao.html";
 };
 
-document.getElementById("IA").onclick = function () {
-  location.href = "IA.html";
-};
 
 document.getElementById("matriz").onclick = function () {
   location.href = "matriz.html";
@@ -313,6 +310,7 @@ function exponencial() {
     res.innerHTML = `O valor de B deve ser positivo`;
   }
 }
+
 function criacao(x){
   let a,b,res;
 
@@ -332,42 +330,44 @@ function criacao(x){
     res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
     return;
   }
-  res.innerHTML = `<h2>Nova Matriz:</h2>`;
-  for(let i=0; i<a; i++){
-    for(let j=0; j<b; j++){
-      res.innerHTML += `<input type="number" placeholder=0>`;
-    }
-    res.innerHTML += `<br>`;
+  res.classList.add("matriz-grid");
+  res.style.gridTemplateColumns = `repeat(${b}, 50px)`;
+
+  for(let i=0; i<a*b; i++){
+    res.innerHTML += `<input type="number" placeholder="0">`;
   }
 }
 
+
 function lerMatriz(mat) {
-  const container = document.getElementById(mat);
-  const elementos = container.childNodes;
+  const res = document.getElementById(mat); // Ou sua variável que referencia o grid
+  
+  // 1. Descobrir o número de colunas (B) através do CSS computado
+  const estilos = window.getComputedStyle(res);
+  const colunasTexto = estilos.gridTemplateColumns; 
+  // O navegador retorna algo como "50px 50px 50px"
+  const colunas = colunasTexto.split(' ').filter(v => v !== '').length;
 
+  // 2. Descobrir o número de linhas (A) com base no total de inputs
+  const inputs = res.querySelectorAll('input');
+  const totalInputs = inputs.length;
+  const linhas = totalInputs / colunas;
+
+  // 3. Organizar os dados em uma Matriz A x B
   const matriz = [];
-  let linha = [];
-
-  elementos.forEach(node => {
-    if (node.tagName === 'INPUT') {
-      linha.push(Number(node.value) || 0);
+  for (let i = 0; i < linhas; i++) {
+    const linha = [];
+    for (let j = 0; j < colunas; j++) {
+      const index = i * colunas + j;
+      // Pegamos o valor e convertemos para número
+      linha.push(Number(inputs[index].value) || 0);
     }
-
-    if (node.nodeName === 'BR') {
-      if (linha.length > 0) {
-        matriz.push(linha);
-        linha = [];
-      }
-    }
-  });
-
-  // adiciona última linha (caso não termine com <br>)
-  if (linha.length > 0) {
     matriz.push(linha);
   }
 
-  return(matriz);
+  return matriz;
 }
+
 
 function matrizRes(op){
   let result = document.getElementById("matrizResultado");

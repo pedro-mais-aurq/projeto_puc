@@ -224,7 +224,6 @@
             <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
             <td data-emoji="📈" id="graficos"> Gráficos</td>
             <td data-emoji="#️⃣​" id="matriz"> Matriz</td>
-            <td data-emoji="🤖" id="IA"> MATH'IAs </td>
         </tr>
     </table>
 
@@ -235,9 +234,9 @@
                 <h1> Matriz A</h1>
                 <div class="risco"></div>
                 <h2>Qual o tamanho da primeira matriz?</h2>
-                <input type="number" placeholder="Linhas(i)" id="linha0">
+                <input type="number" placeholder="Linhas" id="linha0">
                 <p> X </p>
-                <input type="number" placeholder="Colunas(j)" id="col0">
+                <input type="number" placeholder="Colunas" id="col0">
                 <button class="criar" id="criar-matriz" onclick="criacao(1)">Criar</button>
             </div>
 
@@ -271,40 +270,16 @@
             <div class="postit" id="ops">
                 <h2>Operações</h2>
                 <div class="botoes">
-                    <button class="opMat" onclick="matrizRes('+')">+</button>
-                    <button class="opMat" onclick="matrizRes('-')">-</button>
-                    <button class="opMat" onclick="matrizRes('*')">X</button>
-                    <button class="opMat" onclick="matrizRes('t')">Transposta</button>
+                    <button class="opMat" onclick="matrizRes('+')">Primeira matriz + Segunda matriz</button>
+                    <button class="opMat" onclick="matrizRes('-')">Primeira matriz - Segunda matriz</button>
+                    <button class="opMat" onclick="matrizRes('*')">Primeira matriz X Segunda matriz</button>
+                    <button class="opMat" onclick="matrizRes('d')">Determinante da Primeira matriz</button>
+                    <button class="opMat" onclick="matrizRes('t')">Transposta da Primeira matriz</button>
+                    <button class="opMat" onclick="matrizRes('i')">Inversa da Primeira matriz</button>
                 </div>
 
             </div>
 
-                </div>
-                <div class="lousa-box" id="matriz2">
-
-                </div>
-                <div class="lousa-box" id="matrizResultado">
-                    <h2>Matriz resultado</h2>
-                    <p class="matrizRes"> []
-                        
-                    </p>
-                    
-                </div>
-
-                </div>
-                <div class="lousa-box" id="ops">
-                    <h2>Operações</h2>
-                    <div class="botoes">
-                        <button class="opMat" onclick="matrizRes('+')">Primeira matriz + Segunda matriz</button>
-                        <button class="opMat" onclick="matrizRes('-')">Primeira matriz - Segunda matriz</button>
-                        <button class="opMat" onclick="matrizRes('*')">Primeira matriz X Segunda matriz</button>
-                        <button class="opMat" onclick="matrizRes('d')">Determinante da Primeira matriz</button>
-                        <button class="opMat" onclick="matrizRes('t')">Transposta da Primeira matriz</button>
-                        <button class="opMat" onclick="matrizRes('i')">Primeira matriz Inversa</button>
-                    </div>
-                        
-                    </p>
-                    
                 </div>
 
             </main>
