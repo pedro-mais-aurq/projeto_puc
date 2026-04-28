@@ -205,6 +205,46 @@
             background: repeating-linear-gradient(90deg, #b08060 0px, #b08060 6px, transparent 6px, transparent 10px);
             position: relative;
         }
+
+        .matrizRes {
+            margin: 10px;
+            width: 20%;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #0c0c0c;
+            border: solid 2px gray;
+            font-family: 'Caveat', cursive;
+
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .opMat {
+            width: 25%;
+            padding: 11px 0;
+            gap: 5px;
+            margin: 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            background: #3a2e1e;
+            color: #f4ecd8;
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+            margin-left: 20px;
+        }
     </style>
 </head>
 
@@ -242,29 +282,31 @@
 
             <div class="postit">
                 <div class="adesivo"></div>
-                <h1> Matriz B</h2>
-                    <div class="risco"></div>
-                    <h2>Qual o tamanho da segunda matriz?</h2>
-                    <input type="number" placeholder="Linhas" id="linha1">
-                    <p> X </p>
-                    <input type="number" placeholder="Colunas" id="col1">
-                    <button class="criar" id="criar-matriz2" onclick="criacao(2)">Criar</button>
+                <h1> Matriz B</h1>
+                <div class="risco"></div>
+                <h2>Qual o tamanho da segunda matriz?</h2>
+                <input type="number" placeholder="Linhas" id="linha1">
+                <p> X </p>
+                <input type="number" placeholder="Colunas" id="col1">
+                <button class="criar" id="criar-matriz2" onclick="criacao(2)">Criar</button>
             </div>
 
             <div class="postit">
                 <h2>Matriz criada</h2>
+                <div class="risco"></div>
                 <div class="matriz-grid" id="matriz1"></div>
             </div>
 
             <div class="postit">
                 <h2>Matriz criada</h2>
+                <div class="risco"></div>
                 <div class="matriz-grid" id="matriz2"></div>
             </div>
 
             <div class="postit" id="matrizResultado">
                 <h2>Matriz resultado</h2>
-                <p class="matrizRes"> []
-                </p>
+                <div class="risco"></div>
+
             </div>
 
             <div class="postit" id="ops">
@@ -280,14 +322,14 @@
 
             </div>
 
-                </div>
-
-            </main>
         </div>
+
+        </main>
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
     <script src="js/calculo.js"></script>
-    
+
 </body>
 
 <script src="js/calculo.js"></script>

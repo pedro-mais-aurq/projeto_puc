@@ -153,9 +153,9 @@ function juro() {
     resultado2.innerHTML = "Preencha com valores válidos.";
     return;
   }
-  
 
-  let res = (c*i*t)/100;
+
+  let res = (c * i * t) / 100;
 
   j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`;
   //document.getElementById('juro').textContent = res;
@@ -170,9 +170,9 @@ function montante() {
     resultado2.innerHTML = "Preencha com valores válidos.";
     return;
   }
-  
 
-  let res = c*(1+i)**t;
+
+  let res = c * (1 + i) ** t;
 
   m.innerHTML = `${c}*(1+${i})^<sup>${t}</sup> = ${res}`;
   //document.getElementById('juro').textContent = res;
@@ -202,20 +202,20 @@ function calcularTrig() {
     return;
   }
 
-  if(deg>360){
-    while(deg>360){
-      deg-=360;
+  if (deg > 360) {
+    while (deg > 360) {
+      deg -= 360;
     }
   }
 
-  if(deg<0){
-    while(deg<0){
-      deg+=360;
+  if (deg < 0) {
+    while (deg < 0) {
+      deg += 360;
     }
   }
   let rad = (deg * Math.PI) / 180;
 
-  
+
 
   let seno = Math.sin(rad);
   let cosseno = Math.cos(rad);
@@ -225,7 +225,7 @@ function calcularTrig() {
   cosseno = parseFloat(cosseno.toFixed(6));
   tangente = parseFloat(tangente.toFixed(6));
 
-if(deg == 90|| deg == 270){
+  if (deg == 90 || deg == 270) {
     tangente = "Indefinido"
   }
 
@@ -260,7 +260,7 @@ function primeiroGrau() {
 
   document.getElementById('res1').textContent = res;
 
-  res1.innerHTML = `(${a})x + (${b}) = 0 <br> <span class="resultado">x = ${res}</span>`;
+  res1.innerHTML = `(${a})x + (${b}) = 0 <br> <p class="resultado">x = ${res}</p>`;
 }
 
 function segundoGrau() {
@@ -278,17 +278,17 @@ function segundoGrau() {
     let x = formatar((-b) / (2 * a));
 
     res.innerHTML = `(${a})x<sup>2</sup> + (${b}) + (${c}) = 0 <br>
-      <span class = "resultado">Δ = 0<br>
-      x = ${x}</span>`;
+      <p class = "resultado">Δ = 0<br>
+      x = ${x}</p>`;
 
   } else if (delta > 0) {
     let x1 = formatar((-b - Math.sqrt(delta)) / (2 * a));
     let x2 = formatar((-b + Math.sqrt(delta)) / (2 * a));
 
     res.innerHTML = `(${a})x<sup>2</sup> + (${b})x + (${c}) = 0 <br>
-     <span class = "resultado">Δ = ${delta}<br> 
+     <p class = "resultado">Δ = ${delta}<br> 
      x<sub>1</sub> = ${x1} <br> 
-     x<sub>2</sub> = ${x2}</span>`;
+     x<sub>2</sub> = ${x2}</p>`;
   }
 }
 
@@ -301,7 +301,7 @@ function exponencial() {
     let x = formatar(Math.log(b) / Math.log(a));
 
     res.innerHTML = `${a}<sup>x</sup> = ${b} <br> Log<sub>${a}</sub> ${b} = x <br> Log ${b} / Log ${a} = x <br> ${formatar(Math.log(b))} / ${formatar(Math.log(a))} = x<br>
-  <span class = "resultado"> x = ${x} </span>`;
+  <p class = "resultado"> x = ${x} </p>`;
 
   } else if (a = 1 || a < 0) {
     res.innerHTML = `O valor de A deve ser positivo e diferente de 1`;
@@ -311,14 +311,14 @@ function exponencial() {
   }
 }
 
-function criacao(x){
-  let a,b,res;
+function criacao(x) {
+  let a, b, res;
 
-  if(x==1){
+  if (x == 1) {
     a = parseInt(document.getElementById("linha0").value);
     b = parseInt(document.getElementById("col0").value);
     res = document.getElementById("matriz1");
-  } else{
+  } else {
     a = parseInt(document.getElementById("linha1").value);
     b = parseInt(document.getElementById("col1").value);
     res = document.getElementById("matriz2");
@@ -326,14 +326,14 @@ function criacao(x){
 
   res.innerHTML = '';
 
-  if(a <= 0 || b <= 0){
+  if (a <= 0 || b <= 0) {
     res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
     return;
   }
   res.classList.add("matriz-grid");
   res.style.gridTemplateColumns = `repeat(${b}, 50px)`;
 
-  for(let i=0; i<a*b; i++){
+  for (let i = 0; i < a * b; i++) {
     res.innerHTML += `<input type="number" placeholder="0">`;
   }
 }
@@ -341,10 +341,10 @@ function criacao(x){
 
 function lerMatriz(mat) {
   const res = document.getElementById(mat); // Ou sua variável que referencia o grid
-  
+
   // 1. Descobrir o número de colunas (B) através do CSS computado
   const estilos = window.getComputedStyle(res);
-  const colunasTexto = estilos.gridTemplateColumns; 
+  const colunasTexto = estilos.gridTemplateColumns;
   // O navegador retorna algo como "50px 50px 50px"
   const colunas = colunasTexto.split(' ').filter(v => v !== '').length;
 
@@ -369,47 +369,47 @@ function lerMatriz(mat) {
 }
 
 
-function matrizRes(op){
+function matrizRes(op) {
   let result = document.getElementById("matrizResultado");
   result.innerHTML = `<h2>Preencha a matriz.</h2>`
   let mat1 = lerMatriz('matriz1')
   let mat2 = lerMatriz('matriz2')
-  if(mat1.length <= 0){
+  if (mat1.length <= 0) {
     return
   }
   let matriz = [];
   result.innerHTML = ``
 
-  switch(op){
-    case '+': 
-    if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
-      result.innerHTML = `<p>As matrizes devem ter a mesma dimensão</p>`
-      return
-    }
-      matriz = math.add(mat1,mat2);
+  switch (op) {
+    case '+':
+      if (mat1.length != mat2.length || mat1[0].length != mat2[0].length) {
+        result.innerHTML = `<h2>As matrizes devem ter a mesma dimensão</h2>`
+        return
+      }
+      matriz = math.add(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
       break;
-    case '-': 
-    if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
-      result.innerHTML = `<p>As matrizes devem ter a mesma dimensão</p>`
-      return
-    }
-      matriz = math.subtract(mat1,mat2);
+    case '-':
+      if (mat1.length != mat2.length || mat1[0].length != mat2[0].length) {
+        result.innerHTML = `<h2>As matrizes devem ter a mesma dimensão</h2>`
+        return
+      }
+      matriz = math.subtract(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
       break;
-    case '*': 
-    if(mat1[0].length!=mat2.length){
-      result.innerHTML = `<p>O tamanho de colunas da matriz A deve ser igual as linhas da matriz B.</p>`
-      return
-    }
+    case '*':
+      if (mat1[0].length != mat2.length) {
+        result.innerHTML = `<h2>O tamanho de colunas da matriz A deve ser igual as linhas da matriz B.</h2>`
+        return
+      }
       matriz = math.multiply(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
       break;
     case 'd':
-    if(mat1.length!=mat1[0].length){
-      result.innerHTML = `<p>A matriz deve ser quadrada.</p>`
-      return
-    }
+      if (mat1.length != mat1[0].length) {
+        result.innerHTML = `<h2>A matriz deve ser quadrada.</h2>`
+        return
+      }
       matriz = math.det(mat1)
       result.innerHTML += `<h2>Determinante: </h2>`
       result.innerHTML += `${matriz}`
@@ -419,12 +419,12 @@ function matrizRes(op){
       result.innerHTML += `<h2>Matriz transposta:</h2>`
       break;
     case 'i':
-      if(mat1.length!=mat1[0].length){
-        result.innerHTML = `<p>A matriz deve ser quadrada.</p>`
+      if (mat1.length != mat1[0].length) {
+        result.innerHTML = `<h2>A matriz deve ser quadrada.</h2>`
         return
       }
-      if(math.det(mat1)==0){
-        result.innerHTML = `<p>Determinante não pode ser 0.</p>`
+      if (math.det(mat1) == 0) {
+        result.innerHTML = `<h2>Determinante não pode ser 0.</h2>`
         return
       }
       matriz = math.inv(mat1);
@@ -436,7 +436,7 @@ function matrizRes(op){
     row.forEach(item => {
       result.innerHTML += `[${item}]`
     });
-    result.innerHTML += `</p><br>`
+    result.innerHTML += `</p>`
   });
 }
 
