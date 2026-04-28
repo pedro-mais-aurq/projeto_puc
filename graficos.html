@@ -4,24 +4,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> MATHias </title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <title> MATHias - Gráficos </title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
   <link rel="stylesheet" href="css/paleta.css" />
 
   <style>
+    :root {
+      --madeira: #5d4037;
+      --madeira-clara: #8d6e63;
+      --papel: #f8f6ef;
+      --papel-suave: #f4f1e8;
+      --postit: #F4F1E8;
+      --postit-borda: rgb(186, 190, 166);
+      --texto-principal: #3a2e1e;
+      --texto-secundario: #5d4037;
+      --botao-bg: #3a2e1e;
+      --botao-texto: #f4ecd8;
+      --sombra-suave: 0 4px 14px rgba(0, 0, 0, 0.4);
+      --sombra-hover: 0 8px 22px rgba(0, 0, 0, 0.5);
+      --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Caveat', cursive;
+      background: var(--papel);
+      color: var(--texto-principal);
+      min-height: 100vh;
+      padding: 20px;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(93, 64, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(141, 110, 99, 0.03) 0%, transparent 50%);
+    }
+
+    /* ===== HEADER ===== */
+    .quadro {
+      background: var(--madeira);
+      border-radius: 12px;
+      padding: 2px;
+      margin-bottom: 24px;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .quadro-dentro {
+      background: var(--papel);
+      border-radius: 10px;
+      padding: 24px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quadro-dentro::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(93, 64, 55, 0.02) 10px,
+        rgba(93, 64, 55, 0.02) 20px
+      );
+      pointer-events: none;
+    }
+
+    .quadro-dentro h1 {
+      font-family: 'Special Elite', monospace;
+      font-size: 2.5rem;
+      color: var(--texto-principal);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quadro-dentro h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      color: var(--texto-secundario);
+      font-weight: 400;
+      position: relative;
+      z-index: 1;
+    }
+
+    .risco {
+      height: 3px;
+      width: 120px;
+      margin: 16px auto 0;
+      background: repeating-linear-gradient(90deg, #b08060 0px, #b08060 6px, transparent 6px, transparent 10px);
+      opacity: 0.6;
+      position: relative;
+    }
+
+    /* ===== NAVEGAÇÃO ===== */
+    .aba {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      border-collapse: separate;
+      border-spacing: 8px;
+    }
+
+    .aba td {
+      background: var(--papel-suave);
+      border: 2px solid var(--postit-borda);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--texto-principal);
+      transition: var(--transicao);
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .aba td::before {
+      content: attr(data-emoji);
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+      transition: transform 0.3s ease;
+    }
+
+    .aba td:hover {
+      background: var(--postit);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .aba td:hover::before {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    .aba td#graficos {
+      background: var(--madeira);
+      color: var(--botao-texto);
+      border-color: var(--madeira);
+      box-shadow: var(--sombra-suave);
+    }
+
+    /* ===== QUADRO BRANCO ===== */
     .quadro-branco {
       position: relative;
       border-top: none;
-      background: #f4f1e8;
-      border-radius: 6px;
-      padding: 28px;
-      width: 1100px;
+      background: var(--papel);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
       box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 2px 6px rgba(255, 255, 255, 0.6),
         inset 0 -2px 4px rgba(0, 0, 0, 0.05);
-        display: flex ;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
     }
 
     .quadro-branco::before {
@@ -29,61 +181,245 @@
       position: absolute;
       inset: 0;
       background-image:
-
-        linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-
-
-        linear-gradient(to right, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-
-
-        linear-gradient(to right, rgba(0, 0, 0, 0.25) 2px, transparent 2px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 2px, transparent 2px);
-
+        linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0, 0, 0, 0.2) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 2px, transparent 2px);
       background-size:
         10px 10px,
-
         10px 10px,
-
         50px 50px,
-
         50px 50px,
-
         100px 100px,
-
         100px 100px;
-
       z-index: 0;
       pointer-events: none;
+      border-radius: 12px;
     }
 
+    /* ===== CONTROLES ===== */
+    .controles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .controles label {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--texto-principal);
+    }
+
+    .controles input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid #c0b8a8;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--texto-principal);
+      transition: var(--transicao);
+    }
+
+    .controles input:focus {
+      outline: none;
+      border-color: var(--madeira-clara);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1);
+    }
+
+    .controles input::placeholder {
+      color: #a09080;
+      font-style: italic;
+    }
+
+    .controles button {
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: var(--botao-bg);
+      color: var(--botao-texto);
+      box-shadow: var(--sombra-suave);
+      transition: var(--transicao);
+    }
+
+    .controles button:hover {
+      background: #4a3e2e;
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-hover);
+    }
+
+    .controles button:active {
+      transform: translateY(1px);
+    }
+
+    /* ===== ÁREA DO GRÁFICO ===== */
     .area-branca {
-      margin-top: 50px;
       position: relative;
       align-self: center;
-      background-color: aliceblue;
+      background-color: #faf8f5;
       z-index: 2;
-      border-radius: 10px;
-      width: 520px;
-      border:solid var(--madeira) 5px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 600px;
+      border: solid var(--madeira) 4px;
       max-height: 500px;
+      padding: 20px;
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    input {
-      border-radius: 10px; 
-      text-align: center;
-      background-color: rgb(250, 235, 215, 1);  
-      height: 30px;
+    .area-branca canvas {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 420px;
     }
 
-    button {
-      background-color: antiquewhite;
-      height: 30px;
-      border-radius: 10px;
-      text-align: center;
+    /* ===== DICAS ===== */
+    .dicas {
+      z-index: 2;
+      background: var(--papel-suave);
+      border: 1px solid var(--postit-borda);
+      border-radius: 8px;
+      padding: 16px 20px;
+      max-width: 600px;
+      width: 100%;
     }
+
+    .dicas h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--texto-principal);
+    }
+
+    .dicas ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .dicas li {
+      font-size: 1.1rem;
+      color: var(--texto-secundario);
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .dicas li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--madeira-clara);
+      font-weight: bold;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      body {
+        padding: 12px;
+      }
+
+      .quadro-dentro h1 {
+        font-size: 1.8rem;
+      }
+
+      .quadro-dentro h2 {
+        font-size: 1.1rem;
+      }
+
+      .aba td {
+        font-size: 1rem;
+        padding: 8px 10px;
+      }
+
+      .aba td::before {
+        font-size: 1.3rem;
+      }
+
+      .quadro-branco {
+        padding: 20px;
+      }
+
+      .controles {
+        flex-direction: column;
+      }
+
+      .controles input,
+      .controles button {
+        width: 100%;
+      }
+
+      .area-branca {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quadro-dentro {
+        padding: 16px 20px;
+      }
+
+      .quadro-dentro h1 {
+        font-size: 1.5rem;
+      }
+
+      .aba {
+        border-spacing: 4px;
+      }
+
+      .aba td {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+      }
+
+      .controles input {
+        font-size: 1rem;
+        padding: 10px 12px;
+      }
+
+      .controles button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+    }
+
+    /* ===== ANIMAÇÕES ===== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .quadro-branco > * {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .quadro-branco > *:nth-child(1) { animation-delay: 0.1s; }
+    .quadro-branco > *:nth-child(2) { animation-delay: 0.2s; }
+    .quadro-branco > *:nth-child(3) { animation-delay: 0.3s; }
   </style>
+<base target="_blank">
 </head>
 
 <body>
@@ -106,69 +442,120 @@
     </tr>
   </table>
 
-
   <div class="quadro-branco">
-    <input type="text" id="funcao" placeholder="Ex: x^2 + 2*x">
-    <button onclick="gerarGrafico()">Gerar gráfico</button>
-    
+    <div class="controles">
+      <label for="funcao">f(x) =</label>
+      <input type="text" id="funcao" placeholder="Ex: x^2 + 2*x">
+      <button onclick="gerarGrafico()">Gerar gráfico</button>
+    </div>
+
+    <div class="dicas">
+      <h3>💡 Dicas de uso:</h3>
+      <ul>
+        <li>Use <strong>x</strong> como variável independente</li>
+        <li>Potências: <strong>x^2</strong>, <strong>x^3</strong></li>
+        <li>Funções: <strong>sin(x)</strong>, <strong>cos(x)</strong>, <strong>sqrt(x)</strong></li>
+        <li>Multiplicação explícita: <strong>2*x</strong> (não 2x)</li>
+      </ul>
+    </div>
+
     <div class="area-branca">
-      <canvas id="grafico" width="400" height="400"></canvas>
-
-      <script>
-        let chart;
-
-        function gerarGrafico() {
-          const expressao = document.getElementById('funcao').value;
-
-          let xValores = [];
-          let yValores = [];
-
-          for (let x = -10; x <= 10; x += 0.5) {
-            try {
-              const y = math.evaluate(expressao, { x: x });
-              xValores.push(x);
-              yValores.push(y);
-            } catch (erro) {
-              alert("Expressão inválida");
-              return;
-            }
-          }
-
-          const ctx = document.getElementById('grafico');
-
-          if (chart) {
-            chart.destroy();
-          }
-
-          chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: xValores,
-              datasets: [{
-                label: 'f(x)',
-                data: yValores,
-                borderWidth: 2,
-                fill: false
-              }]
-            },
-            options: {
-              scales: {
-                x: {
-                  title: { display: true, text: 'X' }
-                },
-                y: {
-                  title: { display: true, text: 'Y' }
-                }
-              }
-            }
-          });
-        }
-      </script>
+      <canvas id="grafico" width="500" height="400"></canvas>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/calculo.js"></script>
+
+  <script>
+    let chart;
+
+    function gerarGrafico() {
+      const expressao = document.getElementById('funcao').value;
+
+      let xValores = [];
+      let yValores = [];
+
+      for (let x = -10; x <= 10; x += 0.5) {
+        try {
+          const y = math.evaluate(expressao, { x: x });
+          xValores.push(x);
+          yValores.push(y);
+        } catch (erro) {
+          alert("Expressão inválida");
+          return;
+        }
+      }
+
+      const ctx = document.getElementById('grafico');
+
+      if (chart) {
+        chart.destroy();
+      }
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xValores,
+          datasets: [{
+            label: 'f(x)',
+            data: yValores,
+            borderWidth: 2,
+            fill: false,
+            borderColor: '#5d4037',
+            backgroundColor: '#5d4037',
+            pointRadius: 2,
+            pointHoverRadius: 5,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  family: 'Caveat',
+                  size: 16
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: { 
+                display: true, 
+                text: 'X',
+                font: {
+                  family: 'Caveat',
+                  size: 16,
+                  weight: 'bold'
+                }
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.05)'
+              }
+            },
+            y: {
+              title: { 
+                display: true, 
+                text: 'Y',
+                font: {
+                  family: 'Caveat',
+                  size: 16,
+                  weight: 'bold'
+                }
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.05)'
+              }
+            }
+          }
+        }
+      });
+    }
   </script>
 </body>
 
