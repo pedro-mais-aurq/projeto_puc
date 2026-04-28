@@ -67,16 +67,67 @@
         </tr>
     </table>
 
-    <div class="quadro">
-        <div class="quadro-branco">
-            <h1>Gráficos</h1>
-            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+<input type="text" id="funcao" placeholder="Ex: x^2 + 2*x">
+<button onclick="gerarGrafico()">Gerar gráfico</button>
+
+<canvas id="grafico" width="400" height="400"></canvas>
+
+<script>
+let chart;
+
+function gerarGrafico() {
+  const expressao = document.getElementById('funcao').value;
+
+  let xValores = [];
+  let yValores = [];
+
+  for (let x = -10; x <= 10; x += 0.5) {
+    try {
+      const y = math.evaluate(expressao, { x: x });
+      xValores.push(x);
+      yValores.push(y);
+    } catch (erro) {
+      alert("Expressão inválida");
+      return;
+    }
+  }
+
+  const ctx = document.getElementById('grafico');
+
+  if (chart) {
+    chart.destroy();
+  }
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: xValores,
+      datasets: [{
+        label: 'f(x)',
+        data: yValores,
+        borderWidth: 2,
+        fill: false
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          title: { display: true, text: 'X' }
+        },
+        y: {
+          title: { display: true, text: 'Y' }
+        }
+      }
+    }
+  });
+}
+</script>
+
         </div>
     </div>
-
-    <script src="js/calculo.js"></script>
-    <script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+<script src="https://cdn.jsdelivr.net/npm/mathjs@11.11.0/lib/browser/math.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/calculo.js"></script>
 </script>
 </body>
 

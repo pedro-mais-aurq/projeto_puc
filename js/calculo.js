@@ -332,65 +332,111 @@ function criacao(x){
     res.innerHTML = `<p>Coloque valores maiores que 0</p>`;
     return;
   }
-  
-  res.classList.add("matriz-grid");
-  res.style.gridTemplateColumns = `repeat(${b}, 50px)`;
-
-  for(let i=0; i<a*b; i++){
-    res.innerHTML += `<input type="number" placeholder="0">`;
+  res.innerHTML = `<h2>Nova Matriz:</h2>`;
+  for(let i=0; i<a; i++){
+    for(let j=0; j<b; j++){
+      res.innerHTML += `<input type="number" placeholder=0>`;
+    }
+    res.innerHTML += `<br>`;
   }
 }
 
+function lerMatriz(mat) {
+  const container = document.getElementById(mat);
+  const elementos = container.childNodes;
+
+  const matriz = [];
+  let linha = [];
+
+  elementos.forEach(node => {
+    if (node.tagName === 'INPUT') {
+      linha.push(Number(node.value) || 0);
+    }
+
+    if (node.nodeName === 'BR') {
+      if (linha.length > 0) {
+        matriz.push(linha);
+        linha = [];
+      }
+    }
+  });
+
+  // adiciona última linha (caso não termine com <br>)
+  if (linha.length > 0) {
+    matriz.push(linha);
+  }
+
+  return(matriz);
+}
+
 function matrizRes(op){
-  let mat1 = document.getElementById('matriz1');
-  let mat2 = document.getElementById('matriz2');
-  let result = document.getElementById("matrizResultado")
+  let result = document.getElementById("matrizResultado");
+  result.innerHTML = `<h2>Preencha a matriz.</h2>`
+  let mat1 = lerMatriz('matriz1')
+  let mat2 = lerMatriz('matriz2')
+  if(mat1.length <= 0){
+    return
+  }
   let matriz = [];
-  console.log(mat1)
   result.innerHTML = ``
 
   switch(op){
     case '+': 
     if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
-      result.innerHTML = `As matrizes devem ter a mesma dimensão`
+      result.innerHTML = `<p>As matrizes devem ter a mesma dimensão</p>`
       return
     }
-    for (let i = 0; i < mat1.length; i++) {
-    matriz[i] = [];
-    for (let j = 0; j < mat1[i].length; j++) {
-        matriz[i][j] = mat1[i][j] + mat2[i][j];
-      }
-    }
-    break;
+      matriz = math.add(mat1,mat2);
+      result.innerHTML += `<h2>Matriz resultado:</h2>`;
+      break;
     case '-': 
     if(mat1.length!=mat2.length || mat1[0].length!=mat2[0].length){
-      result.innerHTML = `As matrizes devem ter a mesma dimensão`
+      result.innerHTML = `<p>As matrizes devem ter a mesma dimensão</p>`
       return
     }
-    for (let i = 0; i < mat1.length; i++) {
-    matriz[i] = [];
-    for (let j = 0; j < mat1[i].length; j++) {
-        matriz[i][j] = mat1[i][j] - mat2[i][j];
-      }
-    }
-    break;
+      matriz = math.subtract(mat1,mat2);
+      result.innerHTML += `<h2>Matriz resultado:</h2>`;
+      break;
     case '*': 
-    if(mat1.length!=mat2[0].length){
-      result.innerHTML = `O tamanho da linha da matriz A deve ser igual a coluna da matriz B`
+    if(mat1[0].length!=mat2.length){
+      result.innerHTML = `<p>O tamanho de colunas da matriz A deve ser igual as linhas da matriz B.</p>`
       return
     }
-    result = Math.multiply(mat1, mat2)
-    break;
+      matriz = math.multiply(mat1, mat2);
+      result.innerHTML += `<h2>Matriz resultado:</h2>`;
+      break;
+    case 'd':
+    if(mat1.length!=mat1[0].length){
+      result.innerHTML = `<p>A matriz deve ser quadrada.</p>`
+      return
+    }
+      matriz = math.det(mat1)
+      result.innerHTML += `<h2>Determinante: </h2>`
+      result.innerHTML += `${matriz}`
+      return
     case 't':
-      const transpose = (m) => m[0].map((_, i) => m.map(row => row[i]))
-      matriz = transpose(mat1)
+      matriz = math.transpose(mat1);
+      result.innerHTML += `<h2>Matriz transposta:</h2>`
+      break;
+    case 'i':
+      if(mat1.length!=mat1[0].length){
+        result.innerHTML = `<p>A matriz deve ser quadrada.</p>`
+        return
+      }
+      if(math.det(mat1)==0){
+        result.innerHTML = `<p>Determinante não pode ser 0.</p>`
+        return
+      }
+      matriz = math.inv(mat1);
+      result.innerHTML += `<h2>Matriz Inversa:</h2>`
       break;
   }
   matriz.forEach(row => {
+    result.innerHTML += `<p>`
     row.forEach(item => {
-      res.innerHTML += `[${item}]`
+      result.innerHTML += `[${item}]`
     });
-    res.innerHTML += `<br>`
+    result.innerHTML += `</p><br>`
   });
 }
 
