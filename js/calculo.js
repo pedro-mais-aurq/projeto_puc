@@ -140,7 +140,7 @@ function raiz() {
 
   document.getElementById('resultadoRaiz').textContent = res;
 
-  const symbol = "="
+  let symbol = "="
   if( (res**indice) != radicando){
     symbol = "≅"
   }
