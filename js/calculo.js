@@ -187,10 +187,15 @@ function calcularPotencia() {
   let base = document.getElementById("base").value;
   let expoente = document.getElementById("expoente").value;
 
+  
+  
   let res = base ** expoente;
   res = res.toFixed(4);
   document.getElementById('resultado').textContent = res;
-
+  if(base == 0 && expoente == 0){
+    resultado.innerHTML = "Indefinido";
+    return;
+  }
   resultado.innerHTML = `${base}<sup>${expoente}</sup> = ${res}`;
 }
 
@@ -250,8 +255,8 @@ function calcularLogaritmo() {
   let x = document.getElementById("logaritmando").value;
   let b = document.getElementById("baseLogaritmo").value;
 
-  if( x < 1 || b <=0){
-    logaritmo.innerHTML = "Coloque valores válidos";
+  if( x <= 0 || b <= 0 || b == 1){
+    alert("Base e logaritmando devem ser maior que 0. A base deve ser diferente de 1.")
     return
   }
   
