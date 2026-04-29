@@ -130,7 +130,7 @@ function raiz() {
   let indice = document.getElementById("indice").value;
 
 
-  if (radicando === 0 || indice === 0) {
+  if (radicando < 0 || indice === 0) {
     resultado2.innerHTML = "Preencha os valores.";
     return;
   }
@@ -140,7 +140,12 @@ function raiz() {
 
   document.getElementById('resultadoRaiz').textContent = res;
 
-  resultadoRaiz.innerHTML = `<sup>${indice}</sup>√${radicando} = ${res}`;
+  const symbol = "="
+  if( (res**indice) != radicando){
+    symbol = "≅"
+  }
+
+  resultadoRaiz.innerHTML = `<sup>${indice}</sup>√${radicando} ${symbol} ${res}`;
 }
 
 function juro() {
@@ -183,7 +188,7 @@ function calcularPotencia() {
   let expoente = document.getElementById("expoente").value;
 
   let res = base ** expoente;
-
+  res = res.toFixed(4);
   document.getElementById('resultado').textContent = res;
 
   resultado.innerHTML = `${base}<sup>${expoente}</sup> = ${res}`;
