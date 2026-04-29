@@ -181,7 +181,7 @@ function montante() {
   let res = (c * ((1 + (i/100)) ** t));
   res = res.toFixed(4)
 
-  m.innerHTML = `${c}*(1+(${i})/<sub>100</sub>)^<sup>${t}</sup> =<br> ${res}`;
+  m.innerHTML = `${c}*(1+(${i})/<sub>100</sub>)^<sup>${t}</sup> =${res}`;
   //document.getElementById('juro').textContent = res;
 }
 
