@@ -250,6 +250,11 @@ function calcularLogaritmo() {
   let x = document.getElementById("logaritmando").value;
   let b = document.getElementById("baseLogaritmo").value;
 
+  if( x < 1 || b <=0){
+    logaritmo.innerHTML = "Coloque valores válidos";
+    return
+  }
+  
   let y = formatar(Math.log(x) / Math.log(b));
 
   document.getElementById('logaritmo').textContent = y;
