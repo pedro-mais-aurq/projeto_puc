@@ -153,7 +153,7 @@ function juro() {
   let i = document.getElementById("taxa").value;
   let t = document.getElementById("tempo").value;
   let j = document.getElementById("juro");
-  
+  let m = document.getElementById("montanteJuro");
   if (c <= 0 || t <= 0) {
     j.innerHTML = "Preencha com valores válidos.";
     return;
@@ -162,9 +162,9 @@ function juro() {
 
   let res = (c * i * t) / 100;
   res = res.toFixed(4);
-  let m = c + res;
-  j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}<br>
-  Montante = ${m}`;
+  let mont = c + res;
+  j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`
+  m.innerHTML = `${c}+${res} = ${mont}`;
   //document.getElementById('juro').textContent = res;
 }
 function montante() {
