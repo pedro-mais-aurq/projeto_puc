@@ -149,8 +149,8 @@ function juro() {
   let t = document.getElementById("tempo").value;
   let j = document.getElementById("juro");
 
-  if (c <= 0 || i <= 0 || t <= 0) {
-    resultado2.innerHTML = "Preencha com valores válidos.";
+  if (c <= 0 || t <= 0) {
+    j.innerHTML = "Preencha com valores válidos.";
     return;
   }
 
@@ -166,15 +166,15 @@ function montante() {
   let t = document.getElementById("tempoComposto").value;
   let m = document.getElementById("montante");
 
-  if (c <= 0 || i <= 0 || t <= 0) {
-    resultado2.innerHTML = "Preencha com valores válidos.";
+  if (c <= 0 || t <= 0) {
+    m.innerHTML = "Preencha com valores válidos.";
     return;
   }
 
 
-  let res = c * (1 + i) ** t;
+  let res = (c * ((1 + (i/100)) ** t));
 
-  m.innerHTML = `${c}*(1+${i})^<sup>${t}</sup> = ${res}`;
+  m.innerHTML = `${c}*(1+${i}/100)^<sup>${t}</sup> = ${res}`;
   //document.getElementById('juro').textContent = res;
 }
 
