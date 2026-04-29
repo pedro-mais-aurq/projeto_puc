@@ -161,7 +161,7 @@ function juro() {
 
 
   let res = (c * i * t) / 100;
-  res = res.toFixed(4);
+  res = res.toFixed(2);
   let mont = c + res;
   j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`
   m.innerHTML = `${c}+${res} = ${mont}`;
@@ -180,7 +180,7 @@ function montante() {
 
 
   let res = (c * ((1 + (i/100)) ** t));
-  res = res.toFixed(4)
+  res = res.toFixed(2)
 
   m.innerHTML = `${c}*(1+(${i})/<sub>100</sub>)^<sup>${t}</sup> =${res}`;
   //document.getElementById('juro').textContent = res;
