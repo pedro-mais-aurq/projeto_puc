@@ -41,10 +41,6 @@ document.getElementById("avancada").onclick = function () {
   location.href = "avancada.html";
 };
 
-document.getElementById("graficos").onclick = function () {
-  location.href = "graficos.html";
-};
-
 document.getElementById("equacao").onclick = function () {
   location.href = "equacao.html";
 };
@@ -80,8 +76,16 @@ function apagar() {
 }
 
 function escolherOperacao(op) {
+  if(op=='%'){
+    numeroAtual = numeroAtual/100;
+    expressao.textContent = numeroAtual;
+    atualizarDisplay();
+    return
+  }
+  
   numeroGuardado = parseFloat(numeroAtual);
   operacao = op;
+  
   numeroAtual = '0';
 
   expressao.textContent = numeroGuardado + ' ' + op;
@@ -110,10 +114,8 @@ function calcular() {
     case '-': resultado = a - b; break;
     case '×': resultado = a * b; break;
     case '÷': resultado = b !== 0 ? a / b : 'Erro'; break;
-    case '%': resultado = a * (b / 100); break;
-    case '^': resultado = a ** b; break;
   }
-
+  resultado = resultado.toFixed(5)
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
   historico.push(conta);
   atualizarHistorico();
@@ -162,7 +164,7 @@ function juro() {
 
   let res = (c * i * t) / 100;
   res = res.toFixed(2);
-  let mont = c + res;
+  let mont = (+c) + (+res);
   j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`
   m.innerHTML = `${c}+${res} = ${mont}`;
   //document.getElementById('juro').textContent = res;
@@ -206,7 +208,6 @@ function calcularTrig() {
   const input = document.getElementById('entrada');
 
   const valor = input.value;
-  console.log("Valor digitado:", valor);
 
   let deg = parseFloat(valor);
 
@@ -430,7 +431,7 @@ function matrizRes(op) {
       }
       matriz = math.det(mat1)
       result.innerHTML += `<h2>Determinante: </h2>`
-      result.innerHTML += `${matriz}`
+      result.innerHTML += `<p>${matriz}</p>`
       return
     case 't':
       matriz = math.transpose(mat1);
