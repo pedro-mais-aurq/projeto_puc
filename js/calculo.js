@@ -195,7 +195,6 @@ function calcularPotencia() {
   
   
   let res = base ** expoente;
-  res = res.toFixed(4);
   document.getElementById('resultado').textContent = res;
   if(base == 0 && expoente == 0){
     resultado.innerHTML = "Indefinido";
