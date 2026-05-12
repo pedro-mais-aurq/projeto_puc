@@ -82,6 +82,12 @@ function escolherOperacao(op) {
     atualizarDisplay();
     return
   }
+  if(op=='-'){
+    numeroAtual = numeroAtual*(-1);
+    expressao.textContent = numeroAtual;
+    atualizarDisplay();
+    return
+  }
   
   numeroGuardado = parseFloat(numeroAtual);
   operacao = op;
@@ -111,11 +117,11 @@ function calcular() {
 
   switch (operacao) {
     case '+': resultado = a + b; break;
-    case '-': resultado = a - b; break;
+    case '-': resultado = a + b; break;
     case '×': resultado = a * b; break;
     case '÷': resultado = b !== 0 ? a / b : 'Erro'; break;
   }
-  resultado = resultado.toFixed(5)
+  resultado = resultado.toPrecision(5);
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
   historico.push(conta);
   atualizarHistorico();
@@ -147,7 +153,7 @@ function raiz() {
     symbol = "≅"
   }
 
-  resultadoRaiz.innerHTML = `<sup>${indice}</sup>√${radicando} ${symbol} ${res}`;
+  resultadoRaiz.innerHTML = `<span><sup>B</sup>√A = X<br><sup>${indice}</sup>√${radicando} ${symbol} ${res}</span>`;
 }
 
 function juro() {
@@ -195,12 +201,13 @@ function calcularPotencia() {
   
   
   let res = base ** expoente;
+  res = res.toPrecision(4)
   document.getElementById('resultado').textContent = res;
   if(base == 0 && expoente == 0){
     resultado.innerHTML = "Indefinido";
     return;
   }
-  resultado.innerHTML = `${base}<sup>${expoente}</sup> = ${res}`;
+  resultado.innerHTML = `<span>A<sup>B</sup> = X<br>(${base})<sup>${expoente}</sup> = ${res}</span>`;
 }
 
 function calcularTrig() {
@@ -267,18 +274,23 @@ function calcularLogaritmo() {
 
   document.getElementById('logaritmo').textContent = y;
 
-  logaritmo.innerHTML = `log<sub>${b}</sub>${x} = ${y}`;
+  logaritmo.innerHTML = `<span> log<sub>b</sub>(x) = y<br>log<sub>${b}</sub>${x} = ${y}</span>`;
 }
 
 function primeiroGrau() {
   let a = document.getElementById("a1").value;
   let b = document.getElementById("b1").value;
-
+  if(b == ''){
+    b = 0
+  }
   let res = formatar((- b) / a);
 
   document.getElementById('res1').textContent = res;
-
-  res1.innerHTML = `(${a})x + (${b}) = 0 <br> <p class="resultado">x = ${res}</p>`;
+  if(a==0){
+    res1.innerHTML = `ax + b = 0 <br> <p class="resultado">a não pode ser 0</p>`;
+    return
+  }
+  res1.innerHTML = `ax + b = 0 <br>(${a})x + (${b}) = 0 <br> <p class="resultado">x = ${res}</p>`;
 }
 
 function segundoGrau() {
@@ -286,16 +298,27 @@ function segundoGrau() {
   let b = document.getElementById("b2").value.trim();
   let c = document.getElementById("c2").value.trim();
   let res = document.getElementById('res2');
-
+  if(b == ''){
+    b = 0
+  }
+  if(c == ''){
+    c = 0
+  }
   let delta = (b * b) - (4 * a * c);
 
+  if(a==0){
+    res.innerHTML = `ax<sup>2</sup> + bx + c = 0 <br> <p class="resultado">a não pode ser 0</p>`;
+    return
+  }
+
   if (delta < 0) {
-    res.innerHTML = `Delta = ${delta}, não possui raízes reais. `;
+    res.innerHTML = `ax<sup>2</sup> + bx + c = 0 <br>
+    (${a})x<sup>2</sup> + (${b}) + (${c}) = 0 <br> Δ = ${delta}, não possui raízes reais. `;
 
   } else if (delta == 0) {
     let x = formatar((-b) / (2 * a));
 
-    res.innerHTML = `(${a})x<sup>2</sup> + (${b}) + (${c}) = 0 <br>
+    res.innerHTML = `ax<sup>2</sup> + bx + c = 0 <br>(${a})x<sup>2</sup> + (${b}) + (${c}) = 0 <br>
       <p class = "resultado">Δ = 0<br>
       x = ${x}</p>`;
 
@@ -303,7 +326,8 @@ function segundoGrau() {
     let x1 = formatar((-b - Math.sqrt(delta)) / (2 * a));
     let x2 = formatar((-b + Math.sqrt(delta)) / (2 * a));
 
-    res.innerHTML = `(${a})x<sup>2</sup> + (${b})x + (${c}) = 0 <br>
+    res.innerHTML = `ax<sup>2</sup> + bx + c = 0 <br>
+    (${a})x<sup>2</sup> + (${b})x + (${c}) = 0 <br>
      <p class = "resultado">Δ = ${delta}<br> 
      x<sub>1</sub> = ${x1} <br> 
      x<sub>2</sub> = ${x2}</p>`;
@@ -318,7 +342,7 @@ function exponencial() {
   if (a != 1 && a > 0 && b > 0) {
     let x = formatar(Math.log(b) / Math.log(a));
 
-    res.innerHTML = `${a}<sup>x</sup> = ${b} <br> Log<sub>${a}</sub> ${b} = x <br> Log ${b} / Log ${a} = x <br> ${formatar(Math.log(b))} / ${formatar(Math.log(a))} = x<br>
+    res.innerHTML = `a<sup>x</sup> = b <br> ${a}<sup>x</sup> = ${b} <br> Log<sub>${a}</sub> ${b} = x <br> Log ${b} / Log ${a} = x <br> ${formatar(Math.log(b))} / ${formatar(Math.log(a))} = x<br>
   <p class = "resultado"> x = ${x} </p>`;
 
   } else if (a = 1 || a < 0) {
@@ -417,12 +441,20 @@ function matrizRes(op) {
       break;
     case '*':
       if (mat1[0].length != mat2.length) {
-        result.innerHTML = `<h2>O tamanho de colunas da matriz A deve ser igual as linhas da matriz B.</h2>`
+        result.innerHTML = `<h2>O número de colunas da matriz A deve ser igual ao número de linhas da matriz B.</h2>`
         return
       }
       matriz = math.multiply(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
       break;
+    case '*-':
+      if (mat2[0].length != mat1.length) {
+        result.innerHTML = `<h2>O número de colunas da matriz B deve ser igual ao número de linhas da matriz A.</h2>`
+        return
+      }
+      matriz = math.multiply(mat2, mat1);
+      result.innerHTML += `<h2>Matriz resultado:</h2>`;
+    break;
     case 'd':
       if (mat1.length != mat1[0].length) {
         result.innerHTML = `<h2>A matriz deve ser quadrada.</h2>`

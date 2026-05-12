@@ -272,7 +272,7 @@
                 <div class="adesivo"></div>
                 <h1> Matriz A</h1>
                 <div class="risco"></div>
-                <h2>Qual o tamanho da primeira matriz?</h2>
+                <h2>Qual o tamanho da matriz A?</h2>
                 <input type="number" placeholder="Linhas" id="linha0">
                 <p> X </p>
                 <input type="number" placeholder="Colunas" id="col0">
@@ -283,7 +283,7 @@
                 <div class="adesivo"></div>
                 <h1> Matriz B</h1>
                 <div class="risco"></div>
-                <h2>Qual o tamanho da segunda matriz?</h2>
+                <h2>Qual o tamanho da matriz B?</h2>
                 <input type="number" placeholder="Linhas" id="linha1">
                 <p> X </p>
                 <input type="number" placeholder="Colunas" id="col1">
@@ -291,13 +291,13 @@
             </div>
 
             <div class="postit">
-                <h2>Matriz criada</h2>
+                <h2>Matriz A</h2>
                 <div class="risco"></div>
                 <div class="matriz-grid" id="matriz1"></div>
             </div>
 
             <div class="postit">
-                <h2>Matriz criada</h2>
+                <h2>Matriz B</h2>
                 <div class="risco"></div>
                 <div class="matriz-grid" id="matriz2"></div>
             </div>
@@ -311,12 +311,13 @@
             <div class="postit" id="ops">
                 <h2>Operações</h2>
                 <div class="botoes">
-                    <button class="opMat" onclick="matrizRes('+')">Primeira matriz + Segunda matriz</button>
-                    <button class="opMat" onclick="matrizRes('-')">Primeira matriz - Segunda matriz</button>
-                    <button class="opMat" onclick="matrizRes('*')">Primeira matriz X Segunda matriz</button>
-                    <button class="opMat" onclick="matrizRes('d')">Determinante da Primeira matriz</button>
-                    <button class="opMat" onclick="matrizRes('t')">Transposta da Primeira matriz</button>
-                    <button class="opMat" onclick="matrizRes('i')">Inversa da Primeira matriz</button>
+                    <button class="opMat" onclick="matrizRes('+')">Matriz A + Matriz B</button>
+                    <button class="opMat" onclick="matrizRes('-')">Matriz A - Matriz B</button>
+                    <button class="opMat" onclick="matrizRes('*')">Matriz A X Matriz B</button>
+                    <button class="opMat" onclick="matrizRes('*-')">Matriz B X Matriz A</button>
+                    <button class="opMat" onclick="matrizRes('d')">Determinante da Matriz A</button>
+                    <button class="opMat" onclick="matrizRes('t')">Transposta da Matriz A</button>
+                    <button class="opMat" onclick="matrizRes('i')">Inversa da Matriz A</button>
                 </div>
 
             </div>

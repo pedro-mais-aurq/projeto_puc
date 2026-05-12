@@ -282,7 +282,7 @@
                         <span id="tangente"></span>
                     </div>
 
-                    <input type="number" id="entrada" placeholder="Informe o valor do grau a ser calculado.">
+                    <input type="number" id="entrada" placeholder="Informe o valor do grau do ângulo a ser calculado.">
                     <button onclick="calcularTrig()">Calcular</button>
                     
                     <div class="etiqueta">
@@ -307,9 +307,9 @@
                         <input type="number" id="expoente">
                     </div>
 
-                    <div class="linha-resultado">
-                        <h3>Resultado(X):</h3>
-                        <span id="resultado">A<sup>B</sup> = X</span>
+                    <div class="linha-resultado" id="resultado">
+                        <h3>Resultado:</h3>
+                        <span>A<sup>B</sup> = X</span>
                     </div>
 
                     <button onclick="calcularPotencia()">Calcular</button>
@@ -330,9 +330,9 @@
                         <input type="number" id="indice">
                     </div>
 
-                    <div class="linha-resultado">
-                        <h3>Resultado(X):</h3>
-                        <span id="resultadoRaiz"><sup>B</sup>√A = X</span>
+                    <div class="linha-resultado" id="resultadoRaiz">
+                        <h3>Resultado:</h3>
+                        <span><sup>B</sup>√A = X</span>
                     </div>
 
                     <button onclick="raiz()">Calcular</button>
@@ -353,9 +353,9 @@
                         <input type = "number" id ="logaritmando">
                     </div>
 
-                    <div class = "linha-resultado">
-                        <h3> Resultado(y): </h3>
-                        <span id = "logaritmo"> log<sub>b</sub>(x) = y</span>
+                    <div class = "linha-resultado" id = "logaritmo">
+                        <h3> Resultado: </h3>
+                        <span> log<sub>b</sub>(x) = y</span>
                     </div>
 
                     <button onclick="calcularLogaritmo()">Calcular</button>
@@ -372,12 +372,12 @@
                     </div>
 
                     <div class="linha-resultado">
-                        <h3>Taxa%(I): </h3>
+                        <h3>Taxa%/Mes(I): </h3>
                         <input type="number" id="taxa">
                     </div>
 
                     <div class="linha-resultado">
-                        <h3>Tempo(T): </h3>
+                        <h3>Tempo/Mes(T): </h3>
                         <input type="number" id="tempo">
                     </div>
 
@@ -406,12 +406,12 @@
                     </div>
 
                     <div class="linha-resultado">
-                        <h3>Taxa%(I): </h3>
+                        <h3>Taxa%/Mes(I): </h3>
                         <input type="number" id="taxaComposto">
                     </div>
 
                     <div class="linha-resultado">
-                        <h3>Tempo(T): </h3>
+                        <h3>Tempo/Mes(T): </h3>
                         <input type="number" id="tempoComposto">
                     </div>
 
