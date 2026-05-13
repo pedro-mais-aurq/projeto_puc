@@ -455,6 +455,14 @@ function matrizRes(op) {
       matriz = math.multiply(mat2, mat1);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
     break;
+    case '*1':
+      if (mat2[0].length > 1 || mat2.length > 1) {
+        result.innerHTML = `<h2>A matriz B deve ser 1 x 1</h2>`
+        return
+      }
+      matriz = math.dotMultiply(mat1, mat2);
+      result.innerHTML += `<h2>Matriz resultado:</h2>`;
+    break;
     case 'd':
       if (mat1.length != mat1[0].length) {
         result.innerHTML = `<h2>A matriz deve ser quadrada.</h2>`
