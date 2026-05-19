@@ -82,13 +82,8 @@ function escolherOperacao(op) {
     atualizarDisplay();
     return
   }
-  if(op=='-'){
-    numeroAtual = numeroAtual*(-1);
-    expressao.textContent = numeroAtual;
-    atualizarDisplay();
-    return
-  }
   
+  calcular()
   numeroGuardado = parseFloat(numeroAtual);
   operacao = op;
   
@@ -97,6 +92,7 @@ function escolherOperacao(op) {
   expressao.textContent = numeroGuardado + ' ' + op;
   atualizarDisplay();
 }
+
 function atualizarHistorico() {
   const div = document.getElementById('historico');
 
@@ -108,20 +104,23 @@ function atualizarHistorico() {
     div.appendChild(linha);
   });
 }
-function calcular() {
+
+function calcular(){
   if (operacao === null || numeroGuardado === null) return;
 
   let a = numeroGuardado;
   let b = parseFloat(numeroAtual);
   let resultado;
+  let mark = true;
 
   switch (operacao) {
     case '+': resultado = a + b; break;
-    case '-': resultado = a + b; break;
+    case '-': resultado = a - b; break;
     case '×': resultado = a * b; break;
-    case '÷': resultado = b !== 0 ? a / b : 'Erro'; break;
+    case '÷': resultado = b !== 0 ? a / b : 'Erro'; 
+    mark = false; break;
   }
-  resultado = resultado.toPrecision(5);
+  if(mark)  resultado = resultado.toPrecision(5);
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
   historico.push(conta);
   atualizarHistorico();
