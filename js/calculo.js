@@ -76,17 +76,17 @@ function apagar() {
 }
 
 function escolherOperacao(op) {
-  if(op=='%'){
-    numeroAtual = numeroAtual/100;
+  if (op == '%') {
+    numeroAtual = numeroAtual / 100;
     expressao.textContent = numeroAtual;
     atualizarDisplay();
     return
   }
-  
+
   calcular()
   numeroGuardado = parseFloat(numeroAtual);
   operacao = op;
-  
+
   numeroAtual = '0';
 
   expressao.textContent = numeroGuardado + ' ' + op;
@@ -105,7 +105,7 @@ function atualizarHistorico() {
   });
 }
 
-function calcular(){
+function calcular() {
   if (operacao === null || numeroGuardado === null) return;
 
   let a = numeroGuardado;
@@ -117,10 +117,10 @@ function calcular(){
     case '+': resultado = a + b; break;
     case '-': resultado = a - b; break;
     case '×': resultado = a * b; break;
-    case '÷': resultado = b !== 0 ? a / b : 'Erro'; 
-    mark = false; break;
+    case '÷': resultado = b !== 0 ? a / b : 'Erro';
+      mark = false; break;
   }
-  if(mark)  resultado = resultado.toPrecision(5);
+  if (mark) resultado = resultado.toPrecision(5);
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
   historico.push(conta);
   atualizarHistorico();
@@ -148,7 +148,7 @@ function raiz() {
   document.getElementById('resultadoRaiz').textContent = res;
 
   let symbol = "="
-  if( (res**indice) != radicando){
+  if ((res ** indice) != radicando) {
     symbol = "≅"
   }
 
@@ -186,7 +186,7 @@ function montante() {
   }
 
 
-  let res = (c * ((1 + (i/100)) ** t));
+  let res = (c * ((1 + (i / 100)) ** t));
   res = res.toFixed(2)
 
   m.innerHTML = `${c}*(1+(${i})/<sub>100</sub>)^<sup>${t}</sup> =${res}`;
@@ -197,12 +197,12 @@ function calcularPotencia() {
   let base = document.getElementById("base").value;
   let expoente = document.getElementById("expoente").value;
 
-  
-  
+
+
   let res = base ** expoente;
   res = res.toPrecision(4)
   document.getElementById('resultado').textContent = res;
-  if(base == 0 && expoente == 0){
+  if (base == 0 && expoente == 0) {
     resultado.innerHTML = "Indefinido";
     return;
   }
@@ -264,11 +264,11 @@ function calcularLogaritmo() {
   let x = document.getElementById("logaritmando").value;
   let b = document.getElementById("baseLogaritmo").value;
 
-  if( x <= 0 || b <= 0 || b == 1){
+  if (x <= 0 || b <= 0 || b == 1) {
     alert("Base e logaritmando devem ser maior que 0. A base deve ser diferente de 1.")
     return
   }
-  
+
   let y = formatar(Math.log(x) / Math.log(b));
 
   document.getElementById('logaritmo').textContent = y;
@@ -279,13 +279,13 @@ function calcularLogaritmo() {
 function primeiroGrau() {
   let a = document.getElementById("a1").value;
   let b = document.getElementById("b1").value;
-  if(b == ''){
+  if (b == '') {
     b = 0
   }
   let res = formatar((- b) / a);
 
   document.getElementById('res1').textContent = res;
-  if(a==0){
+  if (a == 0) {
     res1.innerHTML = `ax + b = 0 <br> <p class="resultado">a não pode ser 0</p>`;
     return
   }
@@ -297,15 +297,15 @@ function segundoGrau() {
   let b = document.getElementById("b2").value.trim();
   let c = document.getElementById("c2").value.trim();
   let res = document.getElementById('res2');
-  if(b == ''){
+  if (b == '') {
     b = 0
   }
-  if(c == ''){
+  if (c == '') {
     c = 0
   }
   let delta = (b * b) - (4 * a * c);
 
-  if(a==0){
+  if (a == 0) {
     res.innerHTML = `ax<sup>2</sup> + bx + c = 0 <br> <p class="resultado">a não pode ser 0</p>`;
     return
   }
@@ -453,7 +453,7 @@ function matrizRes(op) {
       }
       matriz = math.multiply(mat2, mat1);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
-    break;
+      break;
     case '*1':
       if (mat2[0].length > 1 || mat2.length > 1) {
         result.innerHTML = `<h2>A matriz B deve ser 1 x 1</h2>`
@@ -461,7 +461,7 @@ function matrizRes(op) {
       }
       matriz = math.dotMultiply(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
-    break;
+      break;
     case 'd':
       if (mat1.length != mat1[0].length) {
         result.innerHTML = `<h2>A matriz deve ser quadrada.</h2>`
@@ -488,12 +488,31 @@ function matrizRes(op) {
       result.innerHTML += `<h2>Matriz Inversa:</h2>`
       break;
   }
-  matriz.forEach(row => {
-    result.innerHTML += `<p>`
-    row.forEach(item => {
-      result.innerHTML += `[${item}]`
-    });
-    result.innerHTML += `</p>`
+  result.innerHTML += `
+<div class="matriz-container">
+
+    <div class="colchete-esquerdo"></div>
+
+    <div class="matriz-grid resultado-grid"></div>
+
+    <div class="colchete-direito"></div>
+
+</div>
+`;
+  const grid = result.querySelector(".resultado-grid");
+
+  grid.style.gridTemplateColumns = `repeat(${matriz[0].length}, 50px)`;
+
+  matriz.flat().forEach(item => {
+
+    grid.innerHTML += `
+        <input
+            type="number"
+            class="matrizRes"
+            value="${item}"
+            readonly
+        >
+    `;
   });
 }
 

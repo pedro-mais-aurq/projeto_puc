@@ -189,7 +189,7 @@
             display: grid;
             gap: 6px;
             justify-content: start;
-            padding-bottom: 10px;
+            padding: 6px 0;
         }
 
         .matriz-grid input {
@@ -206,17 +206,69 @@
             position: relative;
         }
 
-        .matrizRes {
-            margin: 10px;
-            width: 20%;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 1.4rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #0c0c0c;
-            border: solid 2px gray;
-            font-family: 'Caveat', cursive;
+        .linha-matriz {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin: 6px 0;
+        }
 
+        .matriz-container {
+            display: flex;
+            align-items: stretch;
+            gap: 8px;
+            width: fit-content;
+            margin: 10px auto;
+        }
+
+        .colchete-esquerdo,
+        .colchete-direito {
+            width: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .colchete-esquerdo::before {
+            content: '';
+            display: block;
+            width: 100%;
+            flex: 1;
+            min-height: 20px;
+            border-left: 3px solid #333;
+            border-top: 3px solid #333;
+            border-bottom: 3px solid #333;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .colchete-direito::before {
+            content: '';
+            display: block;
+            width: 100%;
+            flex: 1;
+            min-height: 20px;
+            border-right: 3px solid #333;
+            border-top: 3px solid #333;
+            border-bottom: 3px solid #333;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .matrizRes {
+            width: 50px;
+            height: 40px;
+
+            padding: 5px;
+            margin: 0;
+
+            border-radius: 6px;
+            border: solid 2px gray;
+
+            text-align: center;
+            font-size: 1.1rem;
+
+            background: rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+            font-family: 'Caveat', cursive;
         }
 
         input[type=number]::-webkit-inner-spin-button,
@@ -293,13 +345,25 @@
             <div class="postit">
                 <h2>Matriz A</h2>
                 <div class="risco"></div>
-                <div class="matriz-grid" id="matriz1"></div>
+                <div class="matriz-container">
+                    <div class="colchete-esquerdo"></div>
+
+                    <div class="matriz-grid" id="matriz1"></div>
+
+                    <div class="colchete-direito"></div>
+                </div>
             </div>
 
             <div class="postit">
                 <h2>Matriz B</h2>
                 <div class="risco"></div>
-                <div class="matriz-grid" id="matriz2"></div>
+                <div class="matriz-container">
+                    <div class="colchete-esquerdo"></div>
+
+                    <div class="matriz-grid" id="matriz2"></div>
+
+                    <div class="colchete-direito"></div>
+                </div>
             </div>
 
             <div class="postit" id="matrizResultado">
@@ -311,14 +375,14 @@
             <div class="postit" id="ops">
                 <h2>Operações</h2>
                 <div class="botoes">
-                    <button class="opMat" onclick="matrizRes('+')">Matriz A + Matriz B</button>
-                    <button class="opMat" onclick="matrizRes('-')">Matriz A - Matriz B</button>
-                    <button class="opMat" onclick="matrizRes('*')">Matriz A * Matriz B</button>
-                    <button class="opMat" onclick="matrizRes('*-')">Matriz B * Matriz A</button>
-                    <button class="opMat" onclick="matrizRes('d')">Determinante da Matriz A</button>
-                    <button class="opMat" onclick="matrizRes('t')">Transposta da Matriz A</button>
-                    <button class="opMat" onclick="matrizRes('i')">Inversa da Matriz A</button>
-                    <button class="opMat" onclick="matrizRes('*1')">Matriz A * α escalar</button>
+                    <button class="opMat" onclick="matrizRes('+')">A + B</button>
+                    <button class="opMat" onclick="matrizRes('-')"> A - B</button>
+                    <button class="opMat" onclick="matrizRes('*')"> A * B</button>
+                    <button class="opMat" onclick="matrizRes('*-')"> B * A</button>
+                    <button class="opMat" onclick="matrizRes('d')">Determinante A</button>
+                    <button class="opMat" onclick="matrizRes('t')">Transposta A</button>
+                    <button class="opMat" onclick="matrizRes('i')">Inversa A</button>
+                    <button class="opMat" onclick="matrizRes('*1')"> A * α escalar</button>
                 </div>
 
             </div>
