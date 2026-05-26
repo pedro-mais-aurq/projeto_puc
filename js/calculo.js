@@ -111,16 +111,14 @@ function calcular() {
   let a = numeroGuardado;
   let b = parseFloat(numeroAtual);
   let resultado;
-  let mark = true;
 
   switch (operacao) {
     case '+': resultado = a + b; break;
     case '-': resultado = a - b; break;
     case '×': resultado = a * b; break;
     case '÷': resultado = b !== 0 ? a / b : 'Erro';
-      mark = false; break;
   }
-  if (mark) resultado = resultado.toPrecision(5);
+  resultado = formatar(resultado);
   let conta = `${a} ${operacao} ${b} = ${resultado}`;
   historico.push(conta);
   atualizarHistorico();
@@ -137,13 +135,21 @@ function raiz() {
   let indice = document.getElementById("indice").value;
 
 
-  if (radicando < 0 || indice === 0) {
-    resultado2.innerHTML = "Preencha os valores.";
+  if (radicando < 0 && (indice % 2 == 0)) {
+    resultadoRaiz.innerHTML = "<p>Não existe nos reais</p>";
     return;
   }
 
-  let res = Math.pow(radicando, 1 / indice);
-  res = res.toFixed(4);
+  if (indice == 0) {
+    resultadoRaiz.innerHTML = "<p>Preencha</p>";
+    return;
+  }
+
+  let res = Math.pow(Math.abs(radicando), 1 / indice);
+  if (radicando<0){
+    res = -res;
+  }
+  res = formatar(res, 4);
 
   document.getElementById('resultadoRaiz').textContent = res;
 
@@ -168,8 +174,9 @@ function juro() {
 
 
   let res = (c * i * t) / 100;
-  res = res.toFixed(2);
+  res = formatar(res);
   let mont = (+c) + (+res);
+  mont = formatar(mont);
   j.innerHTML = `<sup>${c}*${i}*${t}</sup> / <sub>100</sub> = ${res}`
   m.innerHTML = `${c}+${res} = ${mont}`;
   //document.getElementById('juro').textContent = res;
@@ -187,7 +194,7 @@ function montante() {
 
 
   let res = (c * ((1 + (i / 100)) ** t));
-  res = res.toFixed(2)
+  res = formatar(res)
 
   m.innerHTML = `${c}*(1+(${i})/<sub>100</sub>)^<sup>${t}</sup> =${res}`;
   //document.getElementById('juro').textContent = res;
@@ -200,7 +207,7 @@ function calcularPotencia() {
 
 
   let res = base ** expoente;
-  res = res.toPrecision(4)
+  res = formatar(res)
   document.getElementById('resultado').textContent = res;
   if (base == 0 && expoente == 0) {
     resultado.innerHTML = "Indefinido";
@@ -240,9 +247,9 @@ function calcularTrig() {
   let cosseno = Math.cos(rad);
   let tangente = Math.tan(rad);
 
-  seno = parseFloat(seno.toFixed(6));
-  cosseno = parseFloat(cosseno.toFixed(6));
-  tangente = parseFloat(tangente.toFixed(6));
+  seno = parseFloat(formatar(seno, 6));
+  cosseno = parseFloat(formatar(cosseno, 6))
+  tangente = parseFloat(formatar(tangente, 6));
 
   if (deg == 90 || deg == 270) {
     tangente = "Indefinido"
@@ -446,6 +453,9 @@ function matrizRes(op) {
       matriz = math.multiply(mat1, mat2);
       result.innerHTML += `<h2>Matriz resultado:</h2>`;
       break;
+      if (mat1 == 0|| mat2 == 0) {
+        
+      }       
     case '*-':
       if (mat2[0].length != mat1.length) {
         result.innerHTML = `<h2>O número de colunas da matriz B deve ser igual ao número de linhas da matriz A.</h2>`
@@ -514,10 +524,10 @@ function matrizRes(op) {
         >
     `;
   });
-}
+} 
 
-function formatar(valor) {
-  return Number(valor.toFixed(2));
+function formatar(valor, i=2) {
+  return Number(valor.toFixed(i));
 }
 
 function expressaoLog() {
