@@ -141,7 +141,7 @@ function raiz() {
   }
 
   if (indice == 0) {
-    resultadoRaiz.innerHTML = "<p>Preencha com valores válidos.</p>";
+    resultadoRaiz.innerHTML = "<p>Preencha</p>";
     return;
   }
 
@@ -168,7 +168,7 @@ function juro() {
   let j = document.getElementById("juro");
   let m = document.getElementById("montanteJuro");
   if (c <= 0 || t <= 0) {
-    j.innerHTML = "<p>Preencha com valores válidos.</p>";
+    j.innerHTML = "Preencha com valores válidos.";
     return;
   }
 
@@ -188,7 +188,7 @@ function montante() {
   let m = document.getElementById("montante");
 
   if (c <= 0 || t <= 0) {
-    m.innerHTML = "<p>Preencha com valores válidos.</p>";
+    m.innerHTML = "Preencha com valores válidos.";
     return;
   }
 

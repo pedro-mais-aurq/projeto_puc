@@ -2,40 +2,172 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> MATHias </title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
-    <link rel="stylesheet" href="css/paleta.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATHias — MATH'IAs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+  <link rel="stylesheet" href="css/paleta.css" />
 
-    <style>
+  <style>
+    /* ── Container IA ── */
+    .ia-container {
+      width: min(1100px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
 
-    </style>
+    .ia-quadro {
+      width: 100%;
+    }
 
+    /* Chat UI simples */
+    .chat-box {
+      background: rgba(17, 36, 28, 0.8);
+      border-radius: var(--radius);
+      padding: clamp(12px, 3vw, 20px);
+      min-height: 300px;
+      max-height: 60vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .mensagem {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.4;
+    }
+
+    .mensagem.usuario {
+      align-self: flex-end;
+      background: var(--quadro-op);
+      color: var(--giz);
+      border-bottom-right-radius: 2px;
+    }
+
+    .mensagem.ia {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--giz-escuro);
+      border-bottom-left-radius: 2px;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: clamp(6px, 1.5vw, 10px);
+      margin-top: 12px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: clamp(8px, 2vw, 12px) clamp(10px, 2vw, 16px);
+      border-radius: 8px;
+      border: 2px solid var(--madeira);
+      background: rgba(17, 36, 28, 0.6);
+      color: var(--giz);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--madeira-light);
+    }
+
+    .chat-send {
+      padding: clamp(8px, 2vw, 12px) clamp(14px, 3vw, 22px);
+      border-radius: 8px;
+      border: none;
+      background: var(--vermelho);
+      color: var(--giz);
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .chat-send:hover {
+      background: #ce4a39;
+      transform: translateY(-1px);
+    }
+
+    .chat-send:active {
+      transform: translateY(1px);
+    }
+
+    /* Placeholder boas-vindas */
+    .ia-bemvindo {
+      text-align: center;
+      color: var(--giz-escuro);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      opacity: 0.6;
+      margin: auto;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="quadro">
-        <div class="quadro-dentro">
-            <h1>📐 MATHias </h1>
-            <h2> Calculadora Avançada.</h2>
-            <div class="risco"></div>
-        </div>
+
+  <div class="quadro">
+    <div class="quadro-dentro">
+      <h1>📐 MATHias</h1>
+      <h2>Calculadora Avançada.</h2>
+      <div class="risco"></div>
     </div>
+  </div>
 
+  <div class="tabela-container">
     <table class="aba">
-        <tr>
-            <td data-emoji="🔢" id="inicial"> Básica </td>
-            <td data-emoji="📊" id="avancada"> Avançada</td>
-            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
-            <td data-emoji="📈" id="graficos"> Gráficos</td>
-            <td data-emoji="#️⃣​" id="matriz"> Matriz</td>
-            <td data-emoji="🤖" id="IA"> MATH'IAs </td>
-        </tr>
+      <tr>
+        <td data-emoji="🔢" id="inicial">Básica</td>
+        <td data-emoji="📊" id="avancada">Avançada</td>
+        <td data-emoji="✏️" id="equacao">Equações E Texto</td>
+        <td data-emoji="#️⃣​" id="matriz">Matriz</td>
+      </tr>
     </table>
+  </div>
 
+  <div class="quadro ia-quadro">
+    <div class="quadro-dentro">
+      <h2 style="font-size: clamp(1.1rem,3vw,1.5rem); color: var(--giz); margin-bottom: 16px;">
+        🤖 MATH'IAs — Assistente de Matemática
+      </h2>
 
-    <script src="js/calculo.js"></script>
+      <div class="chat-box" id="chatBox">
+        <div class="ia-bemvindo">
+          Olá! Sou o MATH'IAs. Pergunte-me qualquer coisa sobre matemática! 🧮
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Tire suas dúvidas matemáticas..."
+          onkeydown="if(event.key==='Enter') enviarMensagem()" />
+        <button class="chat-send" onclick="enviarMensagem()">Enviar ➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/calculo.js"></script>
 </body>
+
+</html>

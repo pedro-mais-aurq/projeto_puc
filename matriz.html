@@ -1,402 +1,391 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> MATHias </title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
-    <link rel="stylesheet" href="css/paleta.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATHias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+  <link rel="stylesheet" href="css/paleta.css" />
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    * { box-sizing: border-box; }
 
-        .folha {
-            position: relative;
-            min-height: 90px;
-            border-top: none;
-            background: #f8f6ef;
-            border-radius: 6px;
-            padding: 28px;
-            display: flex;
-            flex-direction: row;
-            box-shadow:
-                inset 0 2px 6px rgba(255, 255, 255, 0.6),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.05);
-            max-width: 1100px;
-            width: 100%;
-        }
+    /* ── Folha quadriculada ── */
+    .folha {
+      position: relative;
+      background: #f8f6ef;
+      border-radius: 6px;
+      padding: clamp(16px, 3vw, 28px);
+      width: min(1100px, 100%);
+      overflow-x: hidden;
+      box-shadow:
+        inset 0 2px 6px rgba(255,255,255,0.6),
+        inset 0 -2px 4px rgba(0,0,0,0.05);
+    }
 
+    .folha::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right,  rgba(0,0,0,0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px),
+        linear-gradient(to right,  rgba(0,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(to right,  rgba(0,0,0,0.25) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(0,0,0,0.25) 2px, transparent 2px);
+      background-size:
+        10px 10px, 10px 10px,
+        50px 50px, 50px 50px,
+        100px 100px, 100px 100px;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 6px;
+    }
 
-        .folha::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
+    /* ── Painel de matrizes (grid responsivo) ── */
+    .painel-matrizes {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: clamp(14px, 3vw, 28px);
+    }
 
-                linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+    /* ── Post-it ── */
+    .postit {
+      background-color: #F4F1E8;
+      border: solid rgb(186,190,166) 1px;
+      border-radius: 2px;
+      z-index: 2;
+      width: 100%; /* fluido */
+      padding: clamp(12px, 2vw, 18px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s;
+      position: relative;
+    }
 
+    .postit:hover {
+      transform: rotate(0.5deg) translateY(-2px);
+    }
 
-                linear-gradient(to right, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+    .adesivo {
+      background: rgba(255,200,80,0.6);
+      position: absolute;
+      top: -8px;
+      left: 40px;
+      width: 30px;
+      height: 14px;
+      z-index: 2;
+      border-radius: 1px;
+      transform: rotate(-2deg);
+    }
 
+    .postit h1 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-family: 'Caveat', cursive;
+      color: black;
+      text-align: center;
+    }
 
-                linear-gradient(to right, rgba(0, 0, 0, 0.25) 2px, transparent 2px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 2px, transparent 2px);
+    .postit h2 {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: black;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      margin-top: 4px;
+    }
 
-            background-size:
-                10px 10px,
+    .postit p {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: black;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+    }
 
-                10px 10px,
+    /* ── Risco do post-it ── */
+    .risco-postit {
+      height: 2px;
+      width: 95%;
+      opacity: 0.8;
+      background: repeating-linear-gradient(
+        90deg,
+        #b08060 0px, #b08060 6px,
+        transparent 6px, transparent 10px
+      );
+      margin: 8px 0;
+      flex-shrink: 0;
+    }
 
-                50px 50px,
+    /* ── Inputs do post-it ── */
+    .postit input {
+      margin: 8px;
+      width: min(60%, 200px);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      text-align: center;
+      background: rgba(255,255,255,0.6);
+      color: #0c0c0c;
+      border: solid 2px gray;
+      font-family: 'Caveat', cursive;
+    }
 
-                50px 50px,
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-                100px 100px,
+    /* ── Botão criar ── */
+    .criar {
+      width: min(60%, 200px);
+      padding: clamp(8px, 2vw, 11px) 0;
+      margin: 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      background: #3a2e1e;
+      color: #f4ecd8;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
 
-                100px 100px;
+    .criar:hover {
+      background: #2a1e0e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+    }
 
-            z-index: 1;
-            pointer-events: none;
-        }
+    .criar:active { transform: translateY(1px); transition: 0.05s; }
 
-        .postit {
-            background-color: #F4F1E8;
-            border: solid rgb(186, 190, 166) 1px;
-            border-radius: 2px;
-            z-index: 2;
-            width: 495px;
-            margin: 5px;
-            align-content: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s;
-            position: relative;
-        }
+    .criar::before {
+      content: '✎';
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+    }
 
-        .adesivo {
-            content: '';
-            background: rgba(255, 200, 80, 0.6);
-            position: absolute;
-            top: -8px;
-            left: 40px;
-            opacity: 0.8;
-            width: 30px;
-            height: 14px;
-            z-index: 2;
-            border-radius: 1px;
-            transform: rotate(-2deg);
-            pointer-events: none;
-        }
+    .criar:hover::before { transform: scale(1.1) rotate(15deg); }
 
-        .postit:hover {
-            transform: rotate(1deg) translateY(-2px);
-        }
+    /* ── Colchetes ── */
+    .matriz-container {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+      max-width: 100%;
+      overflow-x: auto;
+      margin: 10px auto;
+      padding: 4px;
+    }
 
-        .resolvido {
-            background: black;
-        }
+    .colchete-esquerdo,
+    .colchete-direito {
+      width: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-        .postit h2,
-        p {
-            font-size: 1.4rem;
+    .colchete-esquerdo::before {
+      content: '';
+      display: block;
+      flex: 1;
+      min-height: 20px;
+      border-left:   3px solid #333;
+      border-top:    3px solid #333;
+      border-bottom: 3px solid #333;
+      border-radius: 6px 0 0 6px;
+    }
 
-            color: black;
-            text-align: center;
-        }
+    .colchete-direito::before {
+      content: '';
+      display: block;
+      flex: 1;
+      min-height: 20px;
+      border-right:  3px solid #333;
+      border-top:    3px solid #333;
+      border-bottom: 3px solid #333;
+      border-radius: 0 6px 6px 0;
+    }
 
-        .postit h1 {
-            font-size: 1.8rem;
-            font-family: 'Caveat', cursive;
-            color: black;
-        }
+    /* ── Grid de inputs da matriz ── */
+    .matriz-grid {
+      display: grid;
+      gap: clamp(3px, 1vw, 6px);
+      justify-content: start;
+      padding: 4px 0;
+    }
 
-        .postit input {
-            margin: 10px;
-            width: 50%;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 1.4rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            color: #0c0c0c;
-            border: solid 2px gray;
-            font-family: 'Caveat', cursive;
-        }
+    .linha-matriz {
+      display: flex;
+      gap: clamp(3px, 1vw, 6px);
+      justify-content: center;
+      margin: 4px 0;
+    }
 
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+    /* Input de célula (fluido com clamp) */
+    .matrizRes,
+    .matriz-grid input {
+      width: clamp(36px, 7vw, 50px);
+      height: clamp(32px, 6vw, 40px);
+      padding: 4px;
+      border-radius: 6px;
+      border: solid 2px gray;
+      text-align: center;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      background: rgba(255,255,255,0.6);
+      color: #0c0c0c;
+      font-family: 'Caveat', cursive;
+    }
 
-        .criar {
-            width: 50%;
-            padding: 11px 0;
-            margin: 12px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Caveat', cursive;
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            background: #3a2e1e;
-            color: #f4ecd8;
-            box-shadow:
-                0 4px 14px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: transform 0.12s ease, box-shadow 0.12s ease;
-        }
+    /* ── Botões de operação ── */
+    .botoes-ops {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(6px, 1.5vw, 10px);
+      justify-content: center;
+      padding: clamp(8px, 2vw, 12px);
+    }
 
-        .criar:hover {
-            background: rgba(0, 0, 0, 0.2F);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
-        }
+    .opMat {
+      flex: 1 1 clamp(100px, 30%, 160px);
+      padding: clamp(8px, 2vw, 11px) 4px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      background: #3a2e1e;
+      color: #f4ecd8;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      text-align: center;
+    }
 
-        .criar:active {
-            transform: translateY(1px);
-            transition: 0.05s;
-        }
+    .opMat:hover {
+      background: #2a1e0e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+    }
 
-        .criar::before {
-            content: '✎';
-            transition: transform 0.3s ease;
-            display: inline-block;
-            margin-right: 8px;
-        }
+    /* ── Scroll para matrizes grandes em mobile ── */
+    @media (max-width: 480px) {
+      .matriz-container {
+        justify-content: flex-start;
+      }
 
-        .criar:hover::before {
-            transform: scale(1.1) rotate(15deg);
-        }
-
-        .painel-matrizes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            margin-bottom: 28px;
-        }
-
-        .matriz-grid {
-            display: grid;
-            gap: 6px;
-            justify-content: start;
-            padding: 6px 0;
-        }
-
-        .matriz-grid input {
-            width: 50px;
-            height: 40px;
-            text-align: center;
-        }
-
-        .risco {
-            height: 2px;
-            width: 95%;
-            opacity: 0.8;
-            background: repeating-linear-gradient(90deg, #b08060 0px, #b08060 6px, transparent 6px, transparent 10px);
-            position: relative;
-        }
-
-        .linha-matriz {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin: 6px 0;
-        }
-
-        .matriz-container {
-            display: flex;
-            align-items: stretch;
-            gap: 8px;
-            width: fit-content;
-            margin: 10px auto;
-        }
-
-        .colchete-esquerdo,
-        .colchete-direito {
-            width: 14px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .colchete-esquerdo::before {
-            content: '';
-            display: block;
-            width: 100%;
-            flex: 1;
-            min-height: 20px;
-            border-left: 3px solid #333;
-            border-top: 3px solid #333;
-            border-bottom: 3px solid #333;
-            border-radius: 6px 0 0 6px;
-        }
-
-        .colchete-direito::before {
-            content: '';
-            display: block;
-            width: 100%;
-            flex: 1;
-            min-height: 20px;
-            border-right: 3px solid #333;
-            border-top: 3px solid #333;
-            border-bottom: 3px solid #333;
-            border-radius: 0 6px 6px 0;
-        }
-
-        .matrizRes {
-            width: 50px;
-            height: 40px;
-
-            padding: 5px;
-            margin: 0;
-
-            border-radius: 6px;
-            border: solid 2px gray;
-
-            text-align: center;
-            font-size: 1.1rem;
-
-            background: rgba(255, 255, 255, 0.1);
-            box-sizing: border-box;
-            font-family: 'Caveat', cursive;
-        }
-
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .opMat {
-            width: 25%;
-            padding: 11px 0;
-            gap: 5px;
-            margin: 10px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Caveat', cursive;
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            background: #3a2e1e;
-            color: #f4ecd8;
-            box-shadow:
-                0 4px 14px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: transform 0.12s ease, box-shadow 0.12s ease;
-            margin-left: 20px;
-        }
-    </style>
+      .matrizRes,
+      .matriz-grid input {
+        width: 34px;
+        height: 30px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="quadro">
-        <div class="quadro-dentro">
-            <h1>📐 MATHias </h1>
-            <h2> Calculadora Avançada.</h2>
-            <div class="risco"></div>
+
+  <div class="quadro">
+    <div class="quadro-dentro">
+      <h1>📐 MATHias</h1>
+      <h2>Calculadora Avançada.</h2>
+      <div class="risco"></div>
+    </div>
+  </div>
+
+    <div class="tabela-container">
+  <table class="aba">
+    <tr>
+      <td data-emoji="🔢" id="inicial">Básica</td>
+      <td data-emoji="📊" id="avancada">Avançada</td>
+      <td data-emoji="✏️" id="equacao">Equações E Texto</td>
+      <td data-emoji="#️⃣​" id="matriz">Matriz</td>
+    </tr>
+  </table>
+    </div>
+  <div class="folha">
+    <div class="painel-matrizes">
+
+      <!-- Definir tamanho Matriz A -->
+      <div class="postit">
+        <div class="adesivo"></div>
+        <h1>Matriz A</h1>
+        <div class="risco-postit"></div>
+        <h2>Qual o tamanho da matriz A?</h2>
+        <input type="number" placeholder="Linhas"  id="linha0" min="1" max="8">
+        <p>X</p>
+        <input type="number" placeholder="Colunas" id="col0"   min="1" max="8">
+        <button class="criar" onclick="criacao(1)">Criar</button>
+      </div>
+
+      <!-- Definir tamanho Matriz B -->
+      <div class="postit">
+        <div class="adesivo"></div>
+        <h1>Matriz B</h1>
+        <div class="risco-postit"></div>
+        <h2>Qual o tamanho da matriz B?</h2>
+        <input type="number" placeholder="Linhas"  id="linha1" min="1" max="8">
+        <p>X</p>
+        <input type="number" placeholder="Colunas" id="col1"   min="1" max="8">
+        <button class="criar" onclick="criacao(2)">Criar</button>
+      </div>
+
+      <!-- Grade Matriz A -->
+      <div class="postit">
+        <h2>Matriz A</h2>
+        <div class="risco-postit"></div>
+        <div class="matriz-container">
+          <div class="colchete-esquerdo"></div>
+          <div class="matriz-grid" id="matriz1"></div>
+          <div class="colchete-direito"></div>
         </div>
-    </div>
+      </div>
 
-    <table class="aba">
-        <tr>
-            <td data-emoji="🔢" id="inicial"> Básica </td>
-            <td data-emoji="📊" id="avancada"> Avançada</td>
-            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
-            <td data-emoji="#️⃣​" id="matriz"> Matriz</td>
-        </tr>
-    </table>
-
-    <div class="folha">
-        <div class="painel-matrizes">
-            <div class="postit">
-                <div class="adesivo"></div>
-                <h1> Matriz A</h1>
-                <div class="risco"></div>
-                <h2>Qual o tamanho da matriz A?</h2>
-                <input type="number" placeholder="Linhas" id="linha0">
-                <p> X </p>
-                <input type="number" placeholder="Colunas" id="col0">
-                <button class="criar" id="criar-matriz" onclick="criacao(1)">Criar</button>
-            </div>
-
-            <div class="postit">
-                <div class="adesivo"></div>
-                <h1> Matriz B</h1>
-                <div class="risco"></div>
-                <h2>Qual o tamanho da matriz B?</h2>
-                <input type="number" placeholder="Linhas" id="linha1">
-                <p> X </p>
-                <input type="number" placeholder="Colunas" id="col1">
-                <button class="criar" id="criar-matriz2" onclick="criacao(2)">Criar</button>
-            </div>
-
-            <div class="postit">
-                <h2>Matriz A</h2>
-                <div class="risco"></div>
-                <div class="matriz-container">
-                    <div class="colchete-esquerdo"></div>
-
-                    <div class="matriz-grid" id="matriz1"></div>
-
-                    <div class="colchete-direito"></div>
-                </div>
-            </div>
-
-            <div class="postit">
-                <h2>Matriz B</h2>
-                <div class="risco"></div>
-                <div class="matriz-container">
-                    <div class="colchete-esquerdo"></div>
-
-                    <div class="matriz-grid" id="matriz2"></div>
-
-                    <div class="colchete-direito"></div>
-                </div>
-            </div>
-
-            <div class="postit" id="matrizResultado">
-                <h2>Matriz resultado</h2>
-                <div class="risco"></div>
-
-            </div>
-
-            <div class="postit" id="ops">
-                <h2>Operações</h2>
-                <div class="botoes">
-                    <button class="opMat" onclick="matrizRes('+')">A + B</button>
-                    <button class="opMat" onclick="matrizRes('-')"> A - B</button>
-                    <button class="opMat" onclick="matrizRes('*')"> A * B</button>
-                    <button class="opMat" onclick="matrizRes('*-')"> B * A</button>
-                    <button class="opMat" onclick="matrizRes('d')">Determinante A</button>
-                    <button class="opMat" onclick="matrizRes('t')">Transposta A</button>
-                    <button class="opMat" onclick="matrizRes('i')">Inversa A</button>
-                    <button class="opMat" onclick="matrizRes('*1')"> A * α escalar</button>
-                </div>
-
-            </div>
-
+      <!-- Grade Matriz B -->
+      <div class="postit">
+        <h2>Matriz B</h2>
+        <div class="risco-postit"></div>
+        <div class="matriz-container">
+          <div class="colchete-esquerdo"></div>
+          <div class="matriz-grid" id="matriz2"></div>
+          <div class="colchete-direito"></div>
         </div>
+      </div>
 
-        </main>
-    </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
-    <script src="js/calculo.js"></script>
+      <!-- Resultado -->
+      <div class="postit" id="matrizResultado">
+        <h2>Matriz resultado</h2>
+        <div class="risco-postit"></div>
+      </div>
 
+      <!-- Operações -->
+      <div class="postit" id="ops">
+        <h2>Operações</h2>
+        <div class="risco-postit"></div>
+        <div class="botoes-ops">
+          <button class="opMat" onclick="matrizRes('+')">A + B</button>
+          <button class="opMat" onclick="matrizRes('-')">A - B</button>
+          <button class="opMat" onclick="matrizRes('*')">A × B</button>
+          <button class="opMat" onclick="matrizRes('*-')">B × A</button>
+          <button class="opMat" onclick="matrizRes('d')">Det A</button>
+          <button class="opMat" onclick="matrizRes('t')">Transposta A</button>
+          <button class="opMat" onclick="matrizRes('i')">Inversa A</button>
+          <button class="opMat" onclick="matrizRes('*1')">A × α escalar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <script src="js/calculo.js"></script>
 </body>
-
-<script src="js/calculo.js"></script>
-
 </html>

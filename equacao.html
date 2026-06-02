@@ -2,245 +2,250 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> MATHias </title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
-    <link rel="stylesheet" href="css/paleta.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATHias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+  <link rel="stylesheet" href="css/paleta.css" />
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        .quadro-preto {
-            position: relative;
-            background-image:
-                radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
-            min-height: 90px;
-            border-top: none;
-            background: #1b1b1b;
-            border-radius: 6px;
-            padding: 28px;
-            display: flex;
-            flex-direction: row;
-            box-shadow:
-                inset 0 2px 6px rgba(0, 0, 0, 0.6),
-                inset 0 -2px 4px rgba(255, 255, 255, 0.05);
-        }
+    /* ── Quadro preto (lousa) ── */
+    .quadro-preto {
+      position: relative;
+      background: #1b1b1b;
+      border-radius: 6px;
+      padding: clamp(20px, 4vw, 32px);
+      display: flex;
+      flex-direction: column;
+      box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.6),
+        inset 0 -2px 4px rgba(255, 255, 255, 0.05);
+    }
 
-        .quadro-preto::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: url(textura.jpg) center/cover no-repeat;
-            opacity: 0.05;
-            mix-blend-mode: screen;
-            pointer-events: none;
-            z-index: 1;
-        }
+    .quadro-preto::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url(textura.jpg) center/cover no-repeat;
+      opacity: 0.05;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-        .lousa-box {
-            position: relative;
-            min-width: 0;
-            padding: 20px 20px;
-            background: rgba(0, 0, 0, 0.08);
-            color: #f4f1e8;
-            text-align: center;
-            z-index: 2;
-            min-height: 220px;
+    /* ── Grid de caixas de equações ── */
+    main {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      /* auto-fit: reorganiza sozinho em mobile */
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: clamp(24px, 5vw, 50px);
+      padding: clamp(10px, 2vw, 15px);
+    }
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    /* ── Lousa-box (card de equação) ── */
+    .lousa-box {
+      position: relative;
+      padding: clamp(16px, 3vw, 20px);
+      background: rgba(0, 0, 0, 0.08);
+      color: #f4f1e8;
+      text-align: center;
+      z-index: 2;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 4px;
+    }
 
+    .lousa-box::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border: 3px solid rgba(244, 241, 232, 0.3);
+      border-radius: 6px;
+      filter: blur(0.3px);
+      transform: rotate(-0.5deg);
+      box-shadow:
+        0 0 2px rgba(255, 255, 255, 0.4),
+        0 0 5px rgba(255, 255, 255, 0.15);
+      z-index: -1;
+    }
 
-        .lousa-box::before {
-            content: "";
-            position: absolute;
-            inset: -10px;
-            border: 3px solid rgba(244, 241, 232, 0.3);
-            border-radius: 6px;
-            filter: blur(0.3px);
-            transform: rotate(-0.5deg);
-            box-shadow:
-                0 0 2px rgba(255, 255, 255, 0.4),
-                0 0 5px rgba(255, 255, 255, 0.15);
-            z-index: -1;
-        }
+    .lousa-box::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border: 2px solid rgba(244, 241, 232, 0.45);
+      border-radius: 8px;
+      transform: rotate(-0.1deg) scale(1.005);
+      filter: blur(0.5px);
+      z-index: -1;
+    }
 
-        .lousa-box::after {
-            content: "";
-            position: absolute;
-            inset: -8px;
-            border: 2px solid rgba(244, 241, 232, 0.45);
-            border-radius: 8px;
-            transform: rotate(-0.1deg) scale(1.005);
-            filter: blur(0.5px);
-            z-index: -1;
-        }
+    .lousa-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      letter-spacing: 1px;
+      text-align: center;
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+      font-family: 'Chalker Dust', 'Special Elite', cursive;
+      color: #f4f1e8;
+    }
 
-        .lousa-box h2 {
-            margin: 0 0 15px;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            text-align: center;
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-            font-family: 'Chalker Dust', cursive;
-        }
+    .lousa-box p {
+      margin: 0;
+      font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+      font-family: 'Gloria Hallelujah', 'Caveat', cursive;
+      color: #f4f1e8;
+    }
 
-        .lousa-box p {
-            margin: 0;
-            font-size: 0.6cm;
-            text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
-            font-family: 'Gloria Hallelujah', cursive;
-        }
+    .lousa-box input {
+      margin-top: 14px;
+      width: 100%;
+      padding: clamp(8px, 2vw, 10px) 15px;
+      border-radius: 6px;
+      border: none;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-family: 'Caveat', cursive;
+      background: rgba(255, 255, 255, 0.1);
+      color: #f4f1e8;
+      box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-        .lousa-box input {
-            margin-top: 20px;
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1.2rem;
-            font-family: 'Comic Sans', cursive;
-            background: rgba(255, 255, 255, 0.1);
-            color: #f4f1e8;
-            box-shadow:
-                inset 0 2px 4px rgba(255, 255, 255, 0.1),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-        }
+    .lousa-box input::placeholder {
+      color: rgba(244, 241, 232, 0.5);
+    }
 
-        .primeiro {
-            color: var(--giz-azul);
-        }
+    /* ── Cores dos tipos de equação ── */
+    .primeiro {
+      color: var(--giz-azul);
+    }
 
-        .segundo {
-            color: var(--giz-laranja);
-        }
+    .segundo {
+      color: var(--giz-laranja);
+    }
 
-        .terceiro {
-            color: var(--giz-verde);
-        }
+    .terceiro {
+      color: var(--giz-verde);
+    }
 
-        .quarto {
-            color: var(--giz-amarelo);
-        }
+    .quarto {
+      color: var(--giz-amarelo);
+    }
 
-        .resultado {
-            color: var(--giz-rosa);
-        }
+    .resultado {
+      color: var(--giz-rosa);
+    }
 
-        main {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
-            padding: 15px;
-        }
+    /* ── Botão resolver ── */
+    .resolver {
+      width: 100%;
+      padding: clamp(8px, 2vw, 11px) 0;
+      margin-top: 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      background: rgba(0, 0, 0, 0.15);
+      color: #F4F1E8;
+      box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
 
-        .resolver {
-            width: 100%;
-            padding: 11px 0;
-            margin-top: 12px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Caveat', cursive;
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            background: rgba(0, 0, 0, 0.1);
-            color: #F4F1E8;
-            box-shadow:
-                0 4px 14px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: transform 0.12s ease, box-shadow 0.12s ease;
-        }
+    .resolver:hover {
+      background: rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+    }
 
-        .resolver:hover {
-            background: rgba(0, 0, 0, 0.2F);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
-        }
+    .resolver:active {
+      transform: translateY(1px);
+      transition: 0.05s;
+    }
 
-        .resolver:active {
-            transform: translateY(1px);
-            transition: 0.05s;
-        }
+    .resolver::before {
+      content: '✎ ';
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
 
-        .resolver::before {
-            content: '✎';
-            transition: transform 0.3s ease;
-            display: inline-block;
-            margin-right: 8px;
-        }
-
-        .resolver:hover::before {
-            transform: scale(1.1) rotate(15deg);
-        }
-    </style>
-
+    .resolver:hover::before {
+      transform: scale(1.1) rotate(15deg);
+    }
+  </style>
 </head>
 
 <body>
-    <div class="quadro">
-        <div class="quadro-dentro">
-            <h1>📐 MATHias </h1>
-            <h2> Calculadora Avançada.</h2>
-            <div class="risco"></div>
-        </div>
-    </div>
 
+  <div class="quadro">
+    <div class="quadro-dentro">
+      <h1>📐 MATHias</h1>
+      <h2>Calculadora Avançada.</h2>
+      <div class="risco"></div>
+    </div>
+  </div>
+
+  <div class="tabela-container">
     <table class="aba">
-        <tr>
-            <td data-emoji="🔢" id="inicial"> Básica </td>
-            <td data-emoji="📊" id="avancada"> Avançada</td>
-            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
-            <td data-emoji="#️⃣​" id="matriz"> Matriz</td>
-        </tr>
+      <tr>
+        <td data-emoji="🔢" id="inicial">Básica</td>
+        <td data-emoji="📊" id="avancada">Avançada</td>
+        <td data-emoji="✏️" id="equacao">Equações E Texto</td>
+        <td data-emoji="#️⃣​" id="matriz">Matriz</td>
+      </tr>
     </table>
+  </div>
 
-    <div class="quadro">
-        <div class="quadro-preto">
-            <main>
-                <div class="lousa-box">
+  <div class="quadro">
+    <div class="quadro-dentro quadro-preto">
+      <main>
 
-                    <h2>Primeiro grau</h2>
-                    <p class="primeiro" id = "res1"> ax + b = <span class="resultado">0</span> </p>
-                    <input type="number" placeholder="Informe A" id="a1">
-                    <input type="number" placeholder="Informe B" id="b1">
-                    <button class="resolver" id="resolver-equacao" onclick="primeiroGrau()">Resolver</button>
-                </div>
-
-                <div class="lousa-box">
-                    <h2>Segundo grau</h2>
-                    <p class="segundo" id="res2"> ax² + bx + c = <span class="resultado" id="res2">0</span> </p>
-                    <input type="number" placeholder="Informe A" id="a2">
-                    <input type="number" placeholder="Informe B" id="b2">
-                    <input type="number" placeholder="Informe C" id="c2">
-                    <button class="resolver" onclick="segundoGrau()">Resolver</button>
-                </div>
-
-                <div class="lousa-box">
-                    <h2>Exponencial</h2>
-                    <p class="terceiro" id="res3"> a<sup>x</sup> = <span class="resultado" id="res3">b</span> </p>
-                    <input type="number" placeholder="Informe A" id="a3">
-                    <input type="number" placeholder="Informe B" id="b3">
-                    <button class="resolver"onclick="exponencial()">Resolver</button>
-                </div>
-
-                
-            </main>
+        <div class="lousa-box">
+          <h2>Primeiro grau</h2>
+          <p class="primeiro" id="res1">ax + b = <span class="resultado">0</span></p>
+          <input type="number" placeholder="Informe A" id="a1">
+          <input type="number" placeholder="Informe B" id="b1">
+          <button class="resolver" onclick="primeiroGrau()">Resolver</button>
         </div>
+
+        <div class="lousa-box">
+          <h2>Segundo grau</h2>
+          <p class="segundo" id="res2">ax² + bx + c = <span class="resultado">0</span></p>
+          <input type="number" placeholder="Informe A" id="a2">
+          <input type="number" placeholder="Informe B" id="b2">
+          <input type="number" placeholder="Informe C" id="c2">
+          <button class="resolver" onclick="segundoGrau()">Resolver</button>
+        </div>
+
+        <div class="lousa-box">
+          <h2>Exponencial</h2>
+          <p class="terceiro" id="res3">a<sup>x</sup> = <span class="resultado">b</span></p>
+          <input type="number" placeholder="Informe A" id="a3">
+          <input type="number" placeholder="Informe B" id="b3">
+          <button class="resolver" onclick="exponencial()">Resolver</button>
+        </div>
+
+      </main>
     </div>
+  </div>
 
-
-
-    <script src="js/calculo.js"></script>
+  <script src="js/calculo.js"></script>
 </body>
+
+</html>

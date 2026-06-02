@@ -2,432 +2,422 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> MATHias </title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
-    <link rel="stylesheet" href="css/paleta.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATHias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>" />
+  <link rel="stylesheet" href="css/paleta.css" />
 
-    <style>
-        main {
-            width: 1100px;
-            min-height: 500px;
-            border-radius: 18px;
-            padding: 35px;
+  <style>
+    /* ── Bancada de madeira (main) ── */
+    main {
+      width: min(1100px, 100%);
+      min-height: 500px;
+      border-radius: 18px;
+      padding: clamp(16px, 4vw, 35px);
 
-            background:
-                linear-gradient(135deg, #6e4528, #8a5b34, #5a381d);
+      background: linear-gradient(135deg, #6e4528, #8a5b34, #5a381d);
+      box-shadow:
+        inset 0 3px 8px rgba(255, 255, 255, 0.06),
+        inset 0 -10px 20px rgba(0, 0, 0, 0.2),
+        0 18px 40px rgba(0, 0, 0, 0.35);
 
-            box-shadow:
-                inset 0 3px 8px rgba(255, 255, 255, 0.06),
-                inset 0 -10px 20px rgba(0, 0, 0, 0.2),
-                0 18px 40px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
 
-            position: relative;
-            overflow: hidden;
-        }
+    main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 2px,
+          transparent 2px, transparent 60px),
+        repeating-linear-gradient(0deg,
+          rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px,
+          transparent 1px, transparent 45px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
 
-        main::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+    /* ── Grade de cadernos: auto-fit para reorganizar no mobile ── */
+    .itens-main {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+      gap: clamp(20px, 4vw, 32px);
+      align-items: start;
+    }
 
-            background:
-                repeating-linear-gradient(90deg,
-                    rgba(255, 255, 255, 0.03) 0px,
-                    rgba(255, 255, 255, 0.03) 2px,
-                    transparent 2px,
-                    transparent 60px),
-                repeating-linear-gradient(0deg,
-                    rgba(0, 0, 0, 0.03) 0px,
-                    rgba(0, 0, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 45px);
+    /* ── Caderno (card) ── */
+    .caderno {
+      width: 100%;
+      /* fluido — sem largura fixa */
+      border-radius: 10px;
+      position: relative;
+      box-shadow:
+        0 12px 20px rgba(0, 0, 0, 0.25),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
 
-            opacity: 0.35;
-            pointer-events: none;
-        }
+    /* ── Folha aberta ── */
+    .folha-aberta {
+      background: #f4ecd8;
+      width: 100%;
+      border-radius: 10px;
+      /* padding: top right bottom left — esquerda maior por causa da margem vermelha */
+      padding: clamp(40px, 8vw, 50px) clamp(16px, 4vw, 28px) clamp(20px, 4vw, 28px) clamp(36px, 8vw, 50px);
+      height: clamp(40vh, 50vw, 60vh);
+      box-shadow:
+        0 15px 28px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 
-        .itens-main {
-            position: relative;
-            display: flex;
-            gap: 19px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            z-index: 1;
-        }
+      position: relative;
+    }
 
-        .caderno {
-            width: 270px;
-            height: 360px;
-            border-radius: 10px;
-            position: relative;
+    /* Linhas horizontais do caderno */
+    .folha-aberta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      background: repeating-linear-gradient(to bottom,
+          transparent,
+          transparent 28px,
+          rgba(80, 120, 255, 0.15) 29px);
+      pointer-events: none;
+    }
 
-            box-shadow:
-                0 12px 20px rgba(0, 0, 0, 0.25),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transform: rotate(-2deg);
+    /* Margem vermelha vertical */
+    .folha-aberta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: clamp(24px, 6vw, 34px);
+      width: 2px;
+      background: rgba(200, 60, 60, 0.35);
+    }
 
-        }
+    /* ── Etiqueta ── */
+    .etiqueta {
+      position: absolute;
+      top: 8px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--grafite);
+      padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 14px);
+      border-radius: 6px;
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(12px, 2.5vw, 16px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+      white-space: nowrap;
+    }
 
-        .folha-aberta {
-            background: #f4ecd8;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            padding: 30px 28px 24px 42px;
+    /* ── Linha de resultado ── */
+    .linha-resultado {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: clamp(8px, 2vw, 12px) 0;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
-            box-shadow:
-                0 15px 28px rgba(0, 0, 0, 0.22),
-                inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    .linha-resultado h3 {
+      margin: 0;
+      font-size: clamp(16px, 3vw, 22px);
+      font-family: 'Caveat', cursive;
+      color: var(--grafite);
+      white-space: nowrap;
+    }
 
-            position: relative;
-            transform: rotate(-2deg);
-        }
+    .linha-resultado span {
+      font-size: clamp(14px, 2.5vw, 18px);
+      font-family: 'Special Elite', cursive;
+      color: var(--grafite-escuro);
+      text-align: right;
+      word-break: break-all;
+    }
 
-        .folha-aberta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 10px;
+    /* ── Inputs dentro da folha ── */
+    input[type="number"] {
+      border: none;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 6px;
+      font-family: 'Caveat', cursive;
+      color: var(--grafite-escuro);
+      font-size: clamp(16px, 3vw, 20px);
+      padding: clamp(6px, 1.5vw, 10px);
+      border-bottom: 2px solid var(--madeira);
+      width: clamp(70px, 18vw, 100px);
+      text-align: right;
+    }
 
-            background:
-                repeating-linear-gradient(to bottom,
-                    transparent,
-                    transparent 28px,
-                    rgba(80, 120, 255, 0.15) 29px);
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
-            pointer-events: none;
-        }
+    /* ── Input de ângulo (largura total) ── */
+    input#entrada {
+      width: 100%;
+      margin: clamp(10px, 2vw, 15px) 0;
+      text-align: left;
+      font-size: clamp(13px, 2.5vw, 16px);
+    }
 
-        .folha-aberta::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 28px;
-            width: 2px;
-            background: rgba(200, 60, 60, 0.35);
-        }
+    /* ── Botão calcular ── */
+    button {
+      background: linear-gradient(135deg, #8a5b34, #5a381d);
+      border: none;
+      color: #f4ecd8;
+      padding: clamp(8px, 2vw, 12px) clamp(14px, 3vw, 28px);
+      border-radius: 12px;
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(14px, 2.5vw, 18px);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 5px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: clamp(8px, 2vw, 12px);
+      position: relative;
+      z-index: 1;
+    }
 
-        .folha-aberta h3 {
-            font-family: 'Special Elite', cursive;
-            color: #2a2a2a;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
+    button::before {
+      content: "📏";
+      font-size: 1.1em;
+    }
 
-        .folha-aberta p {
-            font-family: 'Caveat', cursive;
-            font-size: 24px;
-            color: #2f2f2f;
-            margin-bottom: 14px;
-            position: relative;
-            z-index: 1;
-        }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      background: linear-gradient(135deg, #9b6b3e, #6a4425);
+    }
 
-        .etiqueta {
-            position: absolute;
-            top: 07px;
-            left: 15px;
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #3a2210;
+    }
 
-            background: rgba(255, 255, 255, 0.85);
-            color: var(--grafite);
+    /* ── Tipografia extra ── */
+    .folha-aberta h3 {
+      font-family: 'Special Elite', cursive;
+      color: #2a2a2a;
+      margin-bottom: clamp(12px, 2.5vw, 20px);
+      position: relative;
+      z-index: 1;
+      font-size: clamp(16px, 3vw, 20px);
+    }
 
-            padding: 8px 14px;
-            border-radius: 6px;
+    .folha-aberta p {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(18px, 3.5vw, 24px);
+      color: #2f2f2f;
+      margin-bottom: clamp(8px, 2vw, 14px);
+      position: relative;
+      z-index: 1;
+    }
 
-            font-family: 'Special Elite', cursive;
-            font-size: 16px;
+    /* ── Mobile: remover rotação nos cadernos (prejudica leitura) ── */
+    @media (max-width: 600px) {
 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        input[type="number"] {
-            border: none;
-            background-color: rgba(0, 0, 0, 0.05);
-            border-radius: 6px;
-            font-family: 'Caveat', cursive;
-            color: var(--grafite-escuro);
-            font-size: 20px;
-            margin: 15px 0;
-            padding: 10px;
-            border-bottom: 2px solid var(--madeira);
-        }
-
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-
-        .linha-resultado {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 12px 0;
-            padding-bottom: 6px;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
-            position: relative;
-            z-index: 1;
-        }
-
-        .linha-resultado h3 {
-            margin: 0;
-            font-size: 22px;
-            font-family: 'Caveat', cursive;
-            color: var(--grafite);
-        }
-
-        .linha-resultado span {
-            font-size: 18px;
-            font-family: 'Special Elite', cursive;
-            color: var(--grafite-escuro);
-        }
-
-        .linha-resultado input {
-            width: 90px;
-            height: 30px;
-            margin-left: 6px;
-            margin-bottom: 1px;
-        }
-
-        button {
-            background: linear-gradient(135deg, #8a5b34, #5a381d);
-            border: none;
-            color: #f4ecd8;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-family: 'Special Elite', cursive;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 5px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.3);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        button::before {
-            content: "📏";
-            font-size: 1.2em;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 0 #3a2210, inset 0 1px 2px rgba(255, 255, 255, 0.4);
-            background: linear-gradient(135deg, #9b6b3e, #6a4425);
-        }
-
-        button:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #3a2210;
-        }
-
-        .caderno+.caderno {
-            margin: 30px;
-        }
-
-
-        .letras {
-            font-family: 'Special Elite', cursive;
-            font-size: 10px;
-            color: var(--grafite);
-        }
-    </style>
+      .caderno,
+      .folha-aberta {
+        transform: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="quadro">
-        <div class="quadro-dentro">
-            <h1>📐 MATHias </h1>
-            <h2> Calculadora Avançada.</h2>
-            <div class="risco"></div>
-        </div>
+  <div class="quadro">
+    <div class="quadro-dentro">
+      <h1>📐 MATHias</h1>
+      <h2>Calculadora Avançada.</h2>
+      <div class="risco"></div>
     </div>
+  </div>
 
+  <div class="tabela-container">
     <table class="aba">
-        <tr>
-            <td data-emoji="🔢" id="inicial"> Básica </td>
-            <td data-emoji="📊" id="avancada"> Avançada</td>
-            <td data-emoji="✏️" id="equacao"> Equações E Texto</td>
-            <td data-emoji="#️⃣​" id="matriz"> Matriz</td>
-        </tr>
+      <tr>
+        <td data-emoji="🔢" id="inicial">Básica</td>
+        <td data-emoji="📊" id="avancada">Avançada</td>
+        <td data-emoji="✏️" id="equacao">Equações E Texto</td>
+        <td data-emoji="#️⃣​" id="matriz">Matriz</td>
+      </tr>
     </table>
+  </div>
 
-    <main>
-        <div class="itens-main">
-            <div class="caderno">
-                <div class="folha-aberta">
+  <main>
+    <div class="itens-main">
 
-                    <div class="linha-resultado">
-                        <h3>Seno:</h3>
-                        <span class="trig" id="seno"></span>
+      <!-- Trigonometria -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Trigonometria</div>
 
-                    </div>
-                    <div class="linha-resultado">
-                        <h3>Cosseno:</h3>
-                        <span id="cosseno"></span>
-                    </div>
-                    <div class="linha-resultado">
-                        <h3>Tangente:</h3>
-                        <span id="tangente"></span>
-                    </div>
+          <div class="linha-resultado">
+            <h3>Seno:</h3>
+            <span id="seno"></span>
+          </div>
+          <div class="linha-resultado">
+            <h3>Cosseno:</h3>
+            <span id="cosseno"></span>
+          </div>
+          <div class="linha-resultado">
+            <h3>Tangente:</h3>
+            <span id="tangente"></span>
+          </div>
 
-                    <input type="number" id="entrada" placeholder="Informe o valor do grau do ângulo a ser calculado.">
-                    <button onclick="calcularTrig()">Calcular</button>
-                    
-                    <div class="etiqueta">
-                        Trigonometria
-                    </div>
-                </div>
-            </div>
+          <input type="number" id="entrada" placeholder="Grau do ângulo">
+          <button onclick="calcularTrig()">Calcular</button>
+        </div>
+      </div>
 
-            <div class="caderno">
-                <div class="folha-aberta">
-                    <div class="etiqueta">
-                        Potência.
-                    </div>
+      <!-- Potência -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Potência</div>
 
-                    <div class="linha-resultado">
-                        <h3>Base(A):</h3>
-                        <input type="number" id="base">
-                    </div>
+          <div class="linha-resultado">
+            <h3>Base (A):</h3>
+            <input type="number" id="base">
+          </div>
+          <div class="linha-resultado">
+            <h3>Expoente (B):</h3>
+            <input type="number" id="expoente">
+          </div>
+          <div class="linha-resultado" id="resultado">
+            <h3>Resultado:</h3>
+            <span>A<sup>B</sup> = X</span>
+          </div>
 
-                    <div class="linha-resultado">
-                        <h3>Expoente(B):</h3>
-                        <input type="number" id="expoente">
-                    </div>
+          <button onclick="calcularPotencia()">Calcular</button>
+        </div>
+      </div>
 
-                    <div class="linha-resultado" id="resultado">
-                        <h3>Resultado:</h3>
-                        <span>A<sup>B</sup> = X</span>
-                    </div>
+      <!-- Radiciação -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Radiciação</div>
 
-                    <button onclick="calcularPotencia()">Calcular</button>
-                </div>
-            </div>
+          <div class="linha-resultado">
+            <h3>Radicando (A):</h3>
+            <input type="number" id="radicando">
+          </div>
+          <div class="linha-resultado">
+            <h3>Índice (B):</h3>
+            <input type="number" id="indice">
+          </div>
+          <div class="linha-resultado" id="resultadoRaiz">
+            <h3>Resultado:</h3>
+            <span><sup>B</sup>√A = X</span>
+          </div>
 
-            <div class="caderno">
-                <div class="folha-aberta">
-                    <span class="etiqueta">Radiciação</span>
+          <button onclick="raiz()">Calcular</button>
+        </div>
+      </div>
 
-                    <div class="linha-resultado">
-                        <h3>Radicando(A): </h3>
-                        <input type="number" id="radicando">
-                    </div>
+      <!-- Logaritmo -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Logaritmo</div>
 
-                    <div class="linha-resultado">
-                        <h3>Índice(B): </h3>
-                        <input type="number" id="indice">
-                    </div>
+          <div class="linha-resultado">
+            <h3>Base (b):</h3>
+            <input type="number" id="baseLogaritmo">
+          </div>
+          <div class="linha-resultado">
+            <h3>Logaritmando (x):</h3>
+            <input type="number" id="logaritmando">
+          </div>
+          <div class="linha-resultado" id="logaritmo">
+            <h3>Resultado:</h3>
+            <span>log<sub>b</sub>(x) = y</span>
+          </div>
 
-                    <div class="linha-resultado" id="resultadoRaiz">
-                        <h3>Resultado:</h3>
-                        <span><sup>B</sup>√A = X</span>
-                    </div>
+          <button onclick="calcularLogaritmo()">Calcular</button>
+        </div>
+      </div>
 
-                    <button onclick="raiz()">Calcular</button>
-                </div>
-            </div>
+      <!-- Juros Simples -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Juros Simples</div>
 
-            <div class="caderno">
-                <div class="folha-aberta">
-                    <span class="etiqueta">Logaritmo</span>
-                    
-                    <div class = "linha-resultado">
-                        <h3>Base:(b)</h3>
-                        <input type = "number" id ="baseLogaritmo">
-                    </div>
+          <div class="linha-resultado">
+            <h3>Capital (C):</h3>
+            <input type="number" id="capital">
+          </div>
+          <div class="linha-resultado">
+            <h3>Taxa %/Mês (I):</h3>
+            <input type="number" id="taxa">
+          </div>
+          <div class="linha-resultado">
+            <h3>Tempo/Mês (T):</h3>
+            <input type="number" id="tempo">
+          </div>
+          <div class="linha-resultado">
+            <h3>Juro (J):</h3>
+            <span id="juro"><sup>C×I×T</sup>/<sub>100</sub> = J</span>
+          </div>
+          <div class="linha-resultado">
+            <h3>Montante (M):</h3>
+            <span id="montanteJuro">C + J = M</span>
+          </div>
 
-                    <div class = "linha-resultado">
-                        <h3>Logaritmando:(x) </h3>
-                        <input type = "number" id ="logaritmando">
-                    </div>
+          <button onclick="juro()">Calcular</button>
+        </div>
+      </div>
 
-                    <div class = "linha-resultado" id = "logaritmo">
-                        <h3> Resultado: </h3>
-                        <span> log<sub>b</sub>(x) = y</span>
-                    </div>
+      <!-- Juros Compostos -->
+      <div class="caderno">
+        <div class="folha-aberta">
+          <div class="etiqueta">Juros Compostos</div>
 
-                    <button onclick="calcularLogaritmo()">Calcular</button>
-                </div>
-            </div>
+          <div class="linha-resultado">
+            <h3>Capital (C):</h3>
+            <input type="number" id="capitalComposto">
+          </div>
+          <div class="linha-resultado">
+            <h3>Taxa %/Mês (I):</h3>
+            <input type="number" id="taxaComposto">
+          </div>
+          <div class="linha-resultado">
+            <h3>Tempo/Mês (T):</h3>
+            <input type="number" id="tempoComposto">
+          </div>
+          <div class="linha-resultado">
+            <h3>Montante (M):</h3>
+            <span id="montante">C×(1+I/<sub>100</sub>)<sup>t</sup> = M</span>
+          </div>
 
-            <div class="caderno">
-                <div class="folha-aberta">
-                    <span class="etiqueta">Juros Simples</span>
+          <button onclick="montante()">Calcular</button>
+        </div>
+      </div>
 
-                    <div class="linha-resultado">
-                        <h3>Capital(C): </h3>
-                        <input type="number" id="capital">
-                    </div>
+    </div>
+  </main>
 
-                    <div class="linha-resultado">
-                        <h3>Taxa%/Mes(I): </h3>
-                        <input type="number" id="taxa">
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3>Tempo/Mes(T): </h3>
-                        <input type="number" id="tempo">
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3>Juro(J):</h3>
-                        <span id="juro"><sup>C×I×T</sup> / <sub>100</sub> = J</span>
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3>Montante(M):</h3>
-                        <span id="montanteJuro">C+J = M</span>
-                    </div>
-                    
-                    <button onclick="juro()">Calcular</button>
-                </div>   
-
-            </div>
-
-            <div class="caderno">
-                <div class="folha-aberta">
-                    <span class="etiqueta">Juros Compostos</span>
-
-                    <div class="linha-resultado">
-                        <h3>Capital(C): </h3>
-                        <input type="number" id="capitalComposto">
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3>Taxa%/Mes(I): </h3>
-                        <input type="number" id="taxaComposto">
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3>Tempo/Mes(T): </h3>
-                        <input type="number" id="tempoComposto">
-                    </div>
-
-                    <div class="linha-resultado">
-                        <h3 style = "font-size: 20px;">Montante(M):</h3>
-                        <span id="montante" style="font-size: 17px;"> C×(1+I/<sub>100</sub>)<sup>t</sup> = M</span>
-                    </div>
-
-                    <button onclick="montante()">Calcular</button>
-                </div>
-            </div>
-
-    </main>
-
-
-    <script src="js/calculo.js"></script>
+  <script src="js/calculo.js"></script>
 </body>
 
 </html>
