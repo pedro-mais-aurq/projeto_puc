@@ -141,7 +141,7 @@ function raiz() {
   }
 
   if (indice == 0) {
-    resultadoRaiz.innerHTML = "<p>Preencha</p>";
+    resultadoRaiz.innerHTML = "<p>Preencha com valores válidos</p>";
     return;
   }
 
@@ -168,7 +168,7 @@ function juro() {
   let j = document.getElementById("juro");
   let m = document.getElementById("montanteJuro");
   if (c <= 0 || t <= 0) {
-    j.innerHTML = "Preencha com valores válidos.";
+    j.innerHTML = "<p>Preencha com valores válidos.</p>";
     return;
   }
 
@@ -188,7 +188,7 @@ function montante() {
   let m = document.getElementById("montante");
 
   if (c <= 0 || t <= 0) {
-    m.innerHTML = "Preencha com valores válidos.";
+    m.innerHTML = "<p>Preencha com valores válidos.</p>";
     return;
   }
 
@@ -210,7 +210,7 @@ function calcularPotencia() {
   res = formatar(res)
   document.getElementById('resultado').textContent = res;
   if (base == 0 && expoente == 0) {
-    resultado.innerHTML = "Indefinido";
+    resultado.innerHTML = "<p>Indefinido.</p>";
     return;
   }
   resultado.innerHTML = `<span>A<sup>B</sup> = X<br>(${base})<sup>${expoente}</sup> = ${res}</span>`;
@@ -252,7 +252,7 @@ function calcularTrig() {
   tangente = parseFloat(formatar(tangente, 6));
 
   if (deg == 90 || deg == 270) {
-    tangente = "Indefinido"
+    tangente = "<p>Indefinido.</p>"
   }
 
   atualizarResultadoTrig(seno, cosseno, tangente);
@@ -352,10 +352,10 @@ function exponencial() {
   <p class = "resultado"> x = ${x} </p>`;
 
   } else if (a = 1 || a < 0) {
-    res.innerHTML = `O valor de A deve ser positivo e diferente de 1`;
+    res.innerHTML = `<p>O valor de A deve ser positivo e diferente de 1.</p>`;
   }
   if (b < 0) {
-    res.innerHTML = `O valor de B deve ser positivo`;
+    res.innerHTML = `<p>O valor de B deve ser positivo.</p>`;
   }
 }
 
