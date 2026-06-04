@@ -351,7 +351,7 @@ function exponencial() {
     res.innerHTML = `a<sup>x</sup> = b <br> ${a}<sup>x</sup> = ${b} <br> Log<sub>${a}</sub> ${b} = x <br> Log ${b} / Log ${a} = x <br> ${formatar(Math.log(b))} / ${formatar(Math.log(a))} = x<br>
   <p class = "resultado"> x = ${x} </p>`;
 
-  } else if (a = 1 || a < 0) {
+  } else if (a == 1 || a < 0) {
     res.innerHTML = `<p>O valor de A deve ser positivo e diferente de 1.</p>`;
   }
   if (b < 0) {
